@@ -65,7 +65,7 @@ public class MainController implements Initializable {
     @FXML
     void addProductMenu(ActionEvent event) {
         addProductPane.setVisible(true);
-        addProductPane.setVisible(false);
+        checkProductPane.setVisible(false);
     }
 
     @FXML
