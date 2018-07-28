@@ -1,13 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.nju.omrepository.controller.MainController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.nju.omrepository.controller.MainController">
    <children>
-      <Button layoutX="271.0" layoutY="187.0" mnemonicParsing="false" onAction="#onClick" text="Button" />
+      <SplitPane dividerPositions="0.29797979797979796" maxWidth="900.0" prefHeight="700.0" prefWidth="900.0">
+        <items>
+          <AnchorPane maxWidth="115.0" minHeight="0.0" minWidth="0.0">
+               <children>
+                  <Button layoutY="70.0" mnemonicParsing="false" prefWidth="115.0" text="Button" />
+                  <Button layoutY="100.0" mnemonicParsing="false" prefWidth="115.0" text="Button" />
+                  <Button layoutY="200.0" mnemonicParsing="false" prefWidth="115.0" text="Button" />
+                  <Pane prefHeight="70.0" prefWidth="115.0" styleClass="logo" />
+               </children></AnchorPane>
+          <AnchorPane maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefWidth="785.0">
+               <children>
+                  <SplitPane dividerPositions="0.5" maxWidth="785.0" orientation="VERTICAL" prefHeight="700.0" prefWidth="785.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane maxHeight="50.0" maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefWidth="785.0" stylesheets="@../css/main.css">
+                           <children>
+                              <Button alignment="CENTER" layoutX="577.0" layoutY="18.0" mnemonicParsing="false" onAction="#checkProductMenu" styleClass="menu-button" text="商品查询" textAlignment="CENTER" />
+                              <Button alignment="CENTER" layoutX="682.0" layoutY="18.0" mnemonicParsing="false" onAction="#addProductMenu" styleClass="menu-button" text="新增商品" textAlignment="CENTER" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="785.0">
+                           <children>
+                              <Pane fx:id="addProductPane" prefHeight="650.0" prefWidth="785.0">
+                                 <children>
+                                    <Label layoutX="25.0" layoutY="170.0" text="新增日期：" />
+                                    <DatePicker fx:id="checkInDatePicker" layoutX="150.0" layoutY="165.0" />
+                                    <Button layoutX="625.0" layoutY="550.0" mnemonicParsing="false" onAction="#addProduct" text="确认新建" />
+                                    <Label layoutX="38.0" layoutY="40.0" text="条形码：" />
+                                    <TextField fx:id="barCode" layoutX="150.0" layoutY="35.0" promptText="输入商品条形码" />
+                                    <Label layoutX="432.0" layoutY="40.0" text="新商品名称：" />
+                                    <TextField fx:id="productName" layoutX="555.0" layoutY="35.0" promptText="输入商品名称" />
+                                    <Label layoutX="49.0" layoutY="105.0" text="进价：" />
+                                    <Label layoutX="454.0" layoutY="105.0" text="售价：" />
+                                    <TextField fx:id="primeCost" layoutX="150.0" layoutY="100.0" promptText="输入进价" />
+                                    <TextField fx:id="productPrice" layoutX="555.0" layoutY="100.0" promptText="输入售价" />
+                                    <TextField fx:id="supply" layoutX="555.0" layoutY="165.0" promptText="输入从何处进货" />
+                                    <Label layoutX="474.0" layoutY="170.0" text="供货商：" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="checkProductPane" prefHeight="650.0" prefWidth="785.0" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
    </children>
 </AnchorPane>

@@ -1,3 +1,17 @@
 .root {
-    -fx-font-size: 4em;
+    -fx-background-color: white;
+
+}
+
+.menu-button {
+    -fx-background-color: transprent;
+
+}
+
+.menu-button:hover {
+    -fx-underline: true;
+}
+
+.logo {
+    -fx-background-image: url("../image/logo.png");
 }

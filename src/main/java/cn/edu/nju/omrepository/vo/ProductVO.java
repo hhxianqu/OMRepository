@@ -1,12 +1,9 @@
-package cn.edu.nju.omrepository.entity;
+package cn.edu.nju.omrepository.vo;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "product_info")
-public class ProductInfo {
-    private Integer id;
+public class ProductVO {
+
     private String barCode;
     private String productName;
     private Integer primeCost;
@@ -14,21 +11,9 @@ public class ProductInfo {
     private Date createTime;
     private String supply;
 
-
-    public ProductInfo() {
+    public ProductVO() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    @Column(name = "bar_code")
     public String getBarCode() {
         return barCode;
     }
@@ -37,7 +22,6 @@ public class ProductInfo {
         this.barCode = barCode;
     }
 
-    @Column(name = "product_name")
     public String getProductName() {
         return productName;
     }
@@ -46,7 +30,6 @@ public class ProductInfo {
         this.productName = productName;
     }
 
-    @Column(name = "prime_cost")
     public Integer getPrimeCost() {
         return primeCost;
     }
@@ -55,7 +38,6 @@ public class ProductInfo {
         this.primeCost = primeCost;
     }
 
-    @Column(name = "product_price")
     public Integer getProductPrice() {
         return productPrice;
     }
@@ -64,7 +46,6 @@ public class ProductInfo {
         this.productPrice = productPrice;
     }
 
-    @Column(name = "create_time")
     public Date getCreateTime() {
         return createTime;
     }
@@ -73,7 +54,6 @@ public class ProductInfo {
         this.createTime = createTime;
     }
 
-    @Column(name = "supply")
     public String getSupply() {
         return supply;
     }
