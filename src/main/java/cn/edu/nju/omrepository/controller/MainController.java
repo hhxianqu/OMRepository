@@ -5,36 +5,23 @@ import cn.edu.nju.omrepository.util.DateUtil;
 import cn.edu.nju.omrepository.util.WindowUtil;
 import cn.edu.nju.omrepository.vo.ProductVO;
 import de.felixroske.jfxsupport.FXMLController;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.util.StringConverter;
 
 import javax.annotation.Resource;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 @FXMLController
@@ -94,13 +81,16 @@ public class MainController implements Initializable {
     private Pane confirmPane;
 
     @FXML
+    private TableView<ProductVO> productTable;
+
+    @FXML
     private TableColumn<ProductVO, String> barCodeCol;
 
     @FXML
     private TableColumn<ProductVO, String> nameCol;
 
     @FXML
-    private TableColumn<ProductVO, String> primeCol;
+    private TableColumn<ProductVO, Integer> primeCol;
 
     @FXML
     private TableColumn<ProductVO, String> saleCol;
@@ -109,7 +99,7 @@ public class MainController implements Initializable {
     private TableColumn<ProductVO, String> supplyCol;
 
     @FXML
-    private TableColumn<ProductVO, String> balanceCol;
+    private TableColumn<ProductVO, Integer> balanceCol;
 
     private DateUtil dateUtil = new DateUtil();
 
@@ -171,7 +161,14 @@ public class MainController implements Initializable {
         List<ProductVO> productVOList = tempService.checkProduct(barCode);
         productList.addAll(productVOList);
 
-//        barCodeCol.setCellFactory();
+        productTable.setItems(productList);
+
+        barCodeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getBarCode()));
+        nameCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductName()));
+        primeCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getPrimeCost()).asObject());
+        saleCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductPrice().toString()));
+        supplyCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getSupply()));
+        balanceCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getBalance()).asObject());
     }
 
     @Override
