@@ -40,52 +40,54 @@ AnchorPane {
     -fx-border-color: #ed6973;
 }
 
+
+/** table **/
+
 .table-view{
     -fx-background-color: transparent;
     -fx-border-color: #ed6973;
+    -fx-border-width: 0.03em;
 }
-
 
 .table-view:focused{
     -fx-background-color: transparent;
 }
 
-/* Spaltenköpfe
-    Struktur column-header-background -> column-header */
-
 .table-view .column-header-background{
-    -fx-background-color: linear-gradient(#ed6973 0%, #ec5661 70%);
+    -fx-background-color: white;
+    -fx-pref-height: 35px;
+    -fx-text-alignment: center;
 }
 
 .table-view .column-header-background .label{
     -fx-background-color: transparent;
-    -fx-text-fill: white;
+    -fx-text-fill: #ed6973;
 }
 
 .table-view .column-header {
-    -fx-background-color: transparent;
+    -fx-background-color: white;
+    -fx-border-color:white #ed6973 #ed6973 white;
+    -fx-border-width: 0.03em;
+    -fx-padding: 0;
 }
 
 .table-view .table-cell{
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .table-row-cell{
-    -fx-background-color: -fx-table-cell-border-color, #ec5661;
+    -fx-background-color: -fx-table-cell-border-color, #fff;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em; /* 0 */
-}
-
-.table-row-cell:odd{
-    -fx-background-color: -fx-table-cell-border-color, #ed6973;
-    -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.0em; /* 0 */
+    -fx-text-alignment: center;
+    -fx-border-color: transparent;
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #e9878f;
+    -fx-background-color: #ffc2c7;
     -fx-background-insets: 0;
     -fx-background-radius: 1;
+    -fx-text-fill: white;
 }
 
 .table-view > .virtual-flow > .scroll-bar:vertical,
@@ -97,9 +99,22 @@ AnchorPane {
     -fx-background-color: transparent;
 }
 
-
-
 .table-view > .virtual-flow > .scroll-bar > .increment-button,
 .table-view > .virtual-flow > .scroll-bar > .decrement-button {
     -fx-opacity: 0;
 }
+
+.table-view > .virtual-flow > .scroll-bar:horizontal {
+    -fx-background-insets: 0, 1 0 0 0;
+    -fx-padding: 0 -1 -1 -1;
+}
+
+.table-view > .virtual-flow > .scroll-bar:vertical{
+    -fx-background-insets: 0, 0 0 0 1;
+    -fx-padding: -1 -1 -1 0;
+}
+
+.table-view > .virtual-flow > .corner {
+    -fx-background-color: derive(#ed6973, -1%);
+}
+

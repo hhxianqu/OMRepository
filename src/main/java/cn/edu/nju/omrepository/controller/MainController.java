@@ -101,6 +101,9 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<ProductVO, Integer> balanceCol;
 
+    @FXML
+    private TableColumn<ProductVO, String> createTimeCol;
+
     private DateUtil dateUtil = new DateUtil();
 
     private ObservableList<ProductVO> productList = FXCollections.observableArrayList();
@@ -152,13 +155,17 @@ public class MainController implements Initializable {
 
     @FXML
     void confirm (ActionEvent event) {
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+        window.changeScene("/fxml/store.fxml", event);
     }
 
     @FXML
     void checkProduct(ActionEvent event) {
         String barCode = barInput.getText();
         List<ProductVO> productVOList = tempService.checkProduct(barCode);
+
+        productTable.getItems().clear();
+        productList.clear();
+
         productList.addAll(productVOList);
 
         productTable.setItems(productList);
@@ -169,6 +176,7 @@ public class MainController implements Initializable {
         saleCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductPrice().toString()));
         supplyCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getSupply()));
         balanceCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getBalance()).asObject());
+        createTimeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCreateTime().toString().substring(0, 10)));
     }
 
     @Override

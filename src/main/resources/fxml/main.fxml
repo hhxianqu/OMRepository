@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -13,7 +19,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.nju.omrepository.controller.MainController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.nju.omrepository.controller.MainController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" maxWidth="900.0" prefHeight="700.0" prefWidth="900.0">
         <items>
@@ -75,7 +81,7 @@
                                  <children>
                                     <Label layoutX="400.0" layoutY="30.0" text="商品条码：" />
                                     <TextField fx:id="barInput" layoutX="480.0" layoutY="25.0" promptText="输入待查询商品条码" />
-                                    <TableView fx:id="productTable" layoutX="90.0" layoutY="120.0" prefHeight="435.0" prefWidth="600.0">
+                                    <TableView fx:id="productTable" layoutX="40.0" layoutY="120.0" prefHeight="435.0" prefWidth="702.0">
                                       <columns>
                                         <TableColumn fx:id="barCodeCol" prefWidth="100.0" text="商品条码" />
                                         <TableColumn fx:id="nameCol" prefWidth="100.0" text="商品名称" />
@@ -83,6 +89,7 @@
                                           <TableColumn fx:id="saleCol" prefWidth="100.0" text="商品售价" />
                                           <TableColumn fx:id="supplyCol" prefWidth="100.0" text="供货商" />
                                           <TableColumn fx:id="balanceCol" prefWidth="100.0" text="库存余额" />
+                                          <TableColumn fx:id="createTimeCol" prefWidth="100.0" text="创建时间" />
                                       </columns>
                                     </TableView>
                                     <Button layoutX="670.0" layoutY="25.0" mnemonicParsing="false" onAction="#checkProduct" prefWidth="75.0" styleClass="conform-button" text="查找" />
