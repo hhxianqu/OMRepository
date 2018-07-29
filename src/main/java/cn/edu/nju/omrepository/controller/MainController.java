@@ -96,6 +96,20 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<ProductVO, String> barCodeCol;
 
+    @FXML
+    private TableColumn<ProductVO, String> nameCol;
+
+    @FXML
+    private TableColumn<ProductVO, String> primeCol;
+
+    @FXML
+    private TableColumn<ProductVO, String> saleCol;
+
+    @FXML
+    private TableColumn<ProductVO, String> supplyCol;
+
+    @FXML
+    private TableColumn<ProductVO, String> balanceCol;
 
     private DateUtil dateUtil = new DateUtil();
 
