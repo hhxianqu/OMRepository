@@ -13,6 +13,7 @@ public class ProductInfo {
     private Integer productPrice;
     private Date createTime;
     private String supply;
+    private int balance;
 
 
     public ProductInfo() {
@@ -80,5 +81,14 @@ public class ProductInfo {
 
     public void setSupply(String supply) {
         this.supply = supply;
+    }
+
+    @Column(name = "balance")
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 }

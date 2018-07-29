@@ -9,7 +9,7 @@ public class CustomSplash extends SplashScreen {
      */
     @Override
     public String getImagePath() {
-        return "/image/test.jpg";
+        return "/image/loader.jpg";
     }
 
     /**

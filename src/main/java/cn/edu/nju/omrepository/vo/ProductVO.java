@@ -10,6 +10,7 @@ public class ProductVO {
     private Integer productPrice;
     private Date createTime;
     private String supply;
+    private int balance;
 
     public ProductVO() {
     }
@@ -60,5 +61,13 @@ public class ProductVO {
 
     public void setSupply(String supply) {
         this.supply = supply;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 }

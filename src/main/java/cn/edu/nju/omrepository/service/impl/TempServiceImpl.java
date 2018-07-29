@@ -5,8 +5,11 @@ import cn.edu.nju.omrepository.repository.ProductRepository;
 import cn.edu.nju.omrepository.service.TempService;
 import cn.edu.nju.omrepository.vo.ProductVO;
 import org.springframework.stereotype.Service;
+import sun.security.krb5.internal.Ticket;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TempServiceImpl implements TempService {
@@ -21,8 +24,21 @@ public class TempServiceImpl implements TempService {
         productInfo.setProductPrice(productVO.getProductPrice());
         productInfo.setCreateTime(productVO.getCreateTime());
         productInfo.setSupply(productVO.getSupply());
-        
+        productInfo.setBalance(productVO.getBalance());
+
         return productInfo;
+    }
+
+    private ProductVO convertPOtoVO (ProductVO productVO, ProductInfo productInfo) {
+        productVO.setBarCode(productInfo.getBarCode());
+        productVO.setPrimeCost(productInfo.getPrimeCost());
+        productVO.setProductName(productInfo.getProductName());
+        productVO.setProductPrice(productInfo.getProductPrice());
+        productVO.setCreateTime(productInfo.getCreateTime());
+        productVO.setSupply(productInfo.getSupply());
+        productVO.setBalance(productInfo.getBalance());
+
+        return productVO;
     }
 
     @Override
@@ -32,4 +48,18 @@ public class TempServiceImpl implements TempService {
 
         productRepository.save(productInfo);
     }
+
+    @Override
+    public List<ProductVO> checkProduct(String barCode) {
+        List<ProductInfo> productList = productRepository.findAllByBarCode(barCode);
+        List<ProductVO> resultList = new ArrayList<>();
+
+        for (ProductInfo productInfo : productList) {
+            ProductVO vo = new ProductVO();
+            resultList.add(convertPOtoVO(vo, productInfo));
+        }
+        return resultList;
+    }
+
+
 }
