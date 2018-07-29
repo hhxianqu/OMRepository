@@ -28,7 +28,7 @@
                       <AnchorPane maxHeight="50.0" maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefWidth="785.0" stylesheets="@../css/main.css">
                            <children>
                               <Button alignment="CENTER" layoutX="577.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStoreAction" styleClass="menu-button" text="商品入库" textAlignment="CENTER" />
-                              <Button alignment="CENTER" layoutX="682.0" layoutY="18.0" mnemonicParsing="false" onAction="#outStoreAction" styleClass="menu-button" text="新增商品" textAlignment="CENTER" />
+                              <Button alignment="CENTER" layoutX="668.0" layoutY="18.0" mnemonicParsing="false" onAction="#outStoreAction" styleClass="menu-button" text="下单／出库" textAlignment="CENTER" />
                            </children>
                         </AnchorPane>
                       <AnchorPane maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="785.0">

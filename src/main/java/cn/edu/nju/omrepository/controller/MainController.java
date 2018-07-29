@@ -2,6 +2,7 @@ package cn.edu.nju.omrepository.controller;
 
 import cn.edu.nju.omrepository.service.TempService;
 import cn.edu.nju.omrepository.util.DateUtil;
+import cn.edu.nju.omrepository.util.WindowUtil;
 import cn.edu.nju.omrepository.vo.ProductVO;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.collections.FXCollections;
@@ -93,12 +94,14 @@ public class MainController implements Initializable {
     private Pane confirmPane;
 
     @FXML
-    private TableColumn<String, String> barCodeCol;
+    private TableColumn<ProductVO, String> barCodeCol;
 
 
     private DateUtil dateUtil = new DateUtil();
 
-    private ObservableList<ProductVO> productList;
+    private ObservableList<ProductVO> productList = FXCollections.observableArrayList();
+
+    private WindowUtil window = new WindowUtil();
 
     @FXML
     void addProduct(ActionEvent event) throws ParseException {
@@ -132,17 +135,7 @@ public class MainController implements Initializable {
 
     @FXML
     void storeAboutAction (ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/store.fxml"));
-            Scene scene = new Scene(root, 900, 700);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        window.changeScene("/fxml/store.fxml", event);
     }
 
     @FXML
@@ -162,10 +155,9 @@ public class MainController implements Initializable {
     void checkProduct(ActionEvent event) {
         String barCode = barInput.getText();
         List<ProductVO> productVOList = tempService.checkProduct(barCode);
+        productList.addAll(productVOList);
 
-        for (ProductVO product : productVOList) {
-//            barCodeCol.setCellFactory();
-        }
+//        barCodeCol.setCellFactory();
     }
 
     @Override

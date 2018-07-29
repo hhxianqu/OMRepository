@@ -1,5 +1,6 @@
 package cn.edu.nju.omrepository.controller;
 
+import cn.edu.nju.omrepository.util.WindowUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +24,7 @@ public class StoreController implements Initializable {
     @FXML
     private Pane outStorePane;
 
+    private WindowUtil window = new WindowUtil();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -32,7 +34,7 @@ public class StoreController implements Initializable {
 
     @FXML
     void productAboutAction(ActionEvent event) {
-
+        window.changeScene("/fxml/main.fxml", event);
     }
 
     @FXML
