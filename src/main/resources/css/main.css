@@ -1,5 +1,6 @@
 .root {
     -fx-background-color: white;
+    -fx-border-width: 0;
 }
 
 AnchorPane {
@@ -21,12 +22,12 @@ AnchorPane {
 
 .main-menu-button {
     -fx-background-color: transprent;
-    -fx-text-fill: #ed6973;
+    -fx-text-fill: gainsboro;
 }
 
 .main-menu-button:hover{
-    -fx-background-color: #ed6973;
     -fx-text-fill: white;
+    -fx-background-color: #3b3b3b;
 }
 
 .conform-button {

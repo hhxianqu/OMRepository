@@ -24,11 +24,15 @@ public class StoreController implements Initializable {
     @FXML
     private Pane outStorePane;
 
+    @FXML
+    private Pane storeShow;
+
     private WindowUtil window = new WindowUtil();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        storeAboutButton.setStyle("-fx-background-color: #ed6973; -fx-text-fill: white;");
+        storeAboutButton.setStyle("--fx-text-fill: white; -fx-background-color: #3b3b3b;");
+        storeShow.setVisible(true);
         addToStorePane.setVisible(true);
     }
 
@@ -59,7 +63,9 @@ public class StoreController implements Initializable {
 
     @FXML
     void confirm (ActionEvent event) {
+
     }
+
 
 
 }

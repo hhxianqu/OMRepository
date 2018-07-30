@@ -104,6 +104,17 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<ProductVO, String> createTimeCol;
 
+    @FXML
+    private Pane productShow;
+
+    @FXML
+    private Label checkWarning;
+
+    @FXML
+    private Pane saleShow;
+    @FXML
+    private Pane countShow;
+
     private DateUtil dateUtil = new DateUtil();
 
     private ObservableList<ProductVO> productList = FXCollections.observableArrayList();
@@ -155,28 +166,44 @@ public class MainController implements Initializable {
 
     @FXML
     void confirm (ActionEvent event) {
-        window.changeScene("/fxml/store.fxml", event);
+        window.changeScene("/fxml/main.fxml", event);
     }
 
     @FXML
     void checkProduct(ActionEvent event) {
         String barCode = barInput.getText();
-        List<ProductVO> productVOList = tempService.checkProduct(barCode);
 
-        productTable.getItems().clear();
-        productList.clear();
+        if (! barCode.isEmpty() && barCode.length() <= 15) {
+            List<ProductVO> productVOList = tempService.checkProduct(barCode);
 
-        productList.addAll(productVOList);
+            productTable.getItems().clear();
+            productList.clear();
 
-        productTable.setItems(productList);
+            productList.addAll(productVOList);
 
-        barCodeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getBarCode()));
-        nameCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductName()));
-        primeCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getPrimeCost()).asObject());
-        saleCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductPrice().toString()));
-        supplyCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getSupply()));
-        balanceCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getBalance()).asObject());
-        createTimeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCreateTime().toString().substring(0, 10)));
+            productTable.setItems(productList);
+
+            barCodeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getBarCode()));
+            nameCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductName()));
+            primeCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getPrimeCost()).asObject());
+            saleCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductPrice().toString()));
+            supplyCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getSupply()));
+            balanceCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getBalance()).asObject());
+            createTimeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCreateTime().toString().substring(0, 10)));
+        } else {
+            checkWarning.setVisible(true);
+            checkWarning.setText("请正确输入条码！");
+        }
+
+    }
+
+    @FXML
+    void click(ActionEvent event) {
+        supplyWarning.setVisible(false);
+        productPriceWarning.setVisible(false);
+        productNameWarning.setVisible(false);
+        barCodeWarning.setVisible(false);
+        primeCostWarning.setVisible(false);
     }
 
     @Override
@@ -185,7 +212,9 @@ public class MainController implements Initializable {
         createTime.setValue(LocalDate.now());
         createTime.setShowWeekNumbers(true);
 
-        productAboutButton.setStyle("-fx-background-color: #ed6973; -fx-text-fill: white;");
+        productAboutButton.setStyle("--fx-text-fill: white; -fx-background-color: #3b3b3b;");
+        productShow.setVisible(true);
+        addProductPane.setVisible(true);
 
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
             @Override

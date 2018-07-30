@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -9,54 +10,67 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.nju.omrepository.controller.StoreController">
+<AnchorPane prefHeight="700.0" prefWidth="950.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.nju.omrepository.controller.StoreController">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" maxWidth="900.0" prefHeight="700.0" prefWidth="900.0">
-        <items>
-          <AnchorPane maxWidth="115.0" minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="150.0" style="-fx-background-color: #3e3e3e;">
+         <children>
+             <Button fx:id="storeAboutButton" alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="115.0" mnemonicParsing="false" onAction="#productAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="商品查看" textAlignment="RIGHT">
+                 <font>
+                     <Font name="Heiti TC Light" size="14.0" />
+                 </font>
+             </Button>
+             <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="165.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="仓库查看" textAlignment="RIGHT">
+                 <font>
+                     <Font name="Heiti TC Light" size="14.0" />
+                 </font>
+             </Button>
+             <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="215.0" mnemonicParsing="false" onAction="#saleAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="销售查看" textAlignment="RIGHT">
+                 <font>
+                     <Font name="Heiti TC Light" size="14.0" />
+                 </font>
+             </Button>
+             <Pane layoutX="6.0" layoutY="18.0" prefHeight="70.0" prefWidth="115.0" styleClass="logo" />
+             <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="265.0" mnemonicParsing="false" onAction="#countAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="信息统计" textAlignment="RIGHT">
+               <font>
+                  <Font name="Heiti TC Light" size="13.0" />
+               </font>
+            </Button>
+             <Pane fx:id="storeShow" layoutY="165.0" prefHeight="50.0" prefWidth="5.0" style="-fx-background-color: #ed6973;" visible="false" />
+         </children>
+      </AnchorPane>
+    <AnchorPane layoutX="150.0" minHeight="0.0" minWidth="0.0" prefWidth="800.0">
+         <children>
+          <AnchorPane maxHeight="50.0" minHeight="0.0" minWidth="0.0" prefHeight="49.0" prefWidth="800.0" stylesheets="@../css/main.css">
                <children>
-                  <Button layoutY="97.0" mnemonicParsing="false" onAction="#productAboutAction" prefWidth="115.0" styleClass="main-menu-button" text="商品查看" />
-                  <Button fx:id="storeAboutButton" layoutY="127.0" mnemonicParsing="false" prefWidth="115.0" styleClass="main-menu-button" text="仓库查看" />
-                  <Button layoutY="157.0" mnemonicParsing="false" onAction="#saleAboutAction" prefWidth="115.0" styleClass="main-menu-button" text="销售查看" />
-                  <Pane prefHeight="70.0" prefWidth="115.0" styleClass="logo" />
-                  <Button layoutY="187.0" mnemonicParsing="false" onAction="#countAboutAction" prefWidth="115.0" styleClass="main-menu-button" text="信息统计" />
-               </children></AnchorPane>
-          <AnchorPane maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefWidth="785.0">
+                  <Button alignment="CENTER" layoutX="577.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStoreAction" styleClass="menu-button" text="商品入库" textAlignment="CENTER" />
+                  <Button alignment="CENTER" layoutX="668.0" layoutY="18.0" mnemonicParsing="false" onAction="#outStoreAction" styleClass="menu-button" text="下单／出库" textAlignment="CENTER" />
+               </children>
+               <effect>
+                  <DropShadow color="#0000005b" />
+               </effect>
+            </AnchorPane>
+          <AnchorPane layoutY="50.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #f2f2f2;">
                <children>
-                  <SplitPane dividerPositions="0.5" maxWidth="785.0" orientation="VERTICAL" prefHeight="700.0" prefWidth="785.0" AnchorPane.topAnchor="0.0">
-                    <items>
-                      <AnchorPane maxHeight="50.0" maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefWidth="785.0" stylesheets="@../css/main.css">
+                  <Pane fx:id="addToStorePane" prefHeight="650.0" prefWidth="785.0" style="-fx-background-color: #f2f2f2;">
+                     <children>
+                        <Pane fx:id="confirmPane" layoutX="225.0" layoutY="160.0" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: white;" visible="false">
                            <children>
-                              <Button alignment="CENTER" layoutX="577.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStoreAction" styleClass="menu-button" text="商品入库" textAlignment="CENTER" />
-                              <Button alignment="CENTER" layoutX="668.0" layoutY="18.0" mnemonicParsing="false" onAction="#outStoreAction" styleClass="menu-button" text="下单／出库" textAlignment="CENTER" />
+                              <Label layoutX="22.0" text="成功">
+                                 <font>
+                                    <Font name="Apple Chancery" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="300.0" layoutY="25.0" stroke="#b9b4b4" />
+                              <Label layoutX="95.0" layoutY="80.0" text="新商品已添加成功！" />
+                              <Button layoutX="200.0" layoutY="135.0" mnemonicParsing="false" onAction="#confirm" prefWidth="80.0" styleClass="conform-button" text="确认" />
                            </children>
-                        </AnchorPane>
-                      <AnchorPane maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="785.0">
-                           <children>
-                              <Pane fx:id="addToStorePane" prefHeight="650.0" prefWidth="785.0" style="-fx-background-color: white;">
-                                 <children>
-                                    <Pane fx:id="confirmPane" layoutX="200.0" layoutY="160.0" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: white;" visible="false">
-                                       <children>
-                                          <Label layoutX="22.0" text="成功">
-                                             <font>
-                                                <Font name="Apple Chancery" size="13.0" />
-                                             </font>
-                                          </Label>
-                                          <Line endX="300.0" layoutY="25.0" stroke="#b9b4b4" />
-                                          <Label layoutX="95.0" layoutY="80.0" text="新商品已添加成功！" />
-                                          <Button layoutX="200.0" layoutY="135.0" mnemonicParsing="false" onAction="#confirm" prefWidth="80.0" styleClass="conform-button" text="确认" />
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="outStorePane" prefHeight="650.0" prefWidth="785.0" visible="false" />
-                           </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="outStorePane" prefHeight="650.0" prefWidth="785.0" style="-fx-background-color: #f2f2f2;" visible="false" />
                </children>
             </AnchorPane>
-        </items>
-      </SplitPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

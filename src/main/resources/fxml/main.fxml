@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
@@ -19,93 +21,109 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.nju.omrepository.controller.MainController">
+<AnchorPane prefHeight="700.0" prefWidth="950.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.nju.omrepository.controller.MainController">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" maxWidth="900.0" prefHeight="700.0" prefWidth="900.0">
-        <items>
-          <AnchorPane maxWidth="115.0" minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="150.0" style="-fx-background-color: #3e3e3e;">
+         <children>
+            <Button fx:id="productAboutButton" alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="115.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="商品查看" textAlignment="RIGHT">
+               <font>
+                  <Font name="Heiti TC Light" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="165.0" mnemonicParsing="false" onAction="#storeAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="仓库查看" textAlignment="RIGHT">
+               <font>
+                  <Font name="Heiti TC Light" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="215.0" mnemonicParsing="false" onAction="#saleAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="销售查看" textAlignment="RIGHT">
+               <font>
+                  <Font name="Heiti TC Light" size="14.0" />
+               </font>
+            </Button>
+            <Pane layoutX="6.0" layoutY="18.0" prefHeight="70.0" prefWidth="115.0" styleClass="logo" />
+            <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="265.0" mnemonicParsing="false" onAction="#countAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="信息统计" textAlignment="RIGHT">
+               <font>
+                  <Font name="Heiti TC Light" size="14.0" />
+               </font>
+            </Button>
+            <Pane fx:id="productShow" layoutY="115.0" prefHeight="50.0" prefWidth="5.0" style="-fx-background-color: #ed6973;" visible="false" />
+
+            <Pane fx:id="saleShow" layoutY="215.0" prefHeight="50.0" prefWidth="5.0" style="-fx-background-color: #ed6973;" visible="false" />
+            <Pane fx:id="countShow" layoutY="265.0" prefHeight="50.0" prefWidth="5.0" style="-fx-background-color: #ed6973;" visible="false" />
+         </children>
+      </AnchorPane>
+    <AnchorPane layoutX="150.0" maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefWidth="800.0">
+         <children>
+          <AnchorPane maxHeight="50.0" minHeight="0.0" minWidth="0.0" prefHeight="49.0" prefWidth="800.0" stylesheets="@../css/main.css">
                <children>
-                  <Button fx:id="productAboutButton" layoutY="97.0" mnemonicParsing="false" prefWidth="115.0" styleClass="main-menu-button" text="商品查看" />
-                  <Button layoutY="127.0" mnemonicParsing="false" onAction="#storeAboutAction" prefWidth="115.0" styleClass="main-menu-button" text="仓库查看" />
-                  <Button layoutY="157.0" mnemonicParsing="false" onAction="#saleAboutAction" prefWidth="115.0" styleClass="main-menu-button" text="销售查看" />
-                  <Pane prefHeight="70.0" prefWidth="115.0" styleClass="logo" />
-                  <Button layoutY="187.0" mnemonicParsing="false" onAction="#countAboutAction" prefWidth="115.0" styleClass="main-menu-button" text="信息统计" />
-               </children></AnchorPane>
-          <AnchorPane maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefWidth="785.0">
+                  <Button alignment="CENTER" layoutX="586.0" layoutY="18.0" mnemonicParsing="false" onAction="#checkProductMenu" styleClass="menu-button" text="商品查询" textAlignment="CENTER" />
+                  <Button alignment="CENTER" layoutX="691.0" layoutY="18.0" mnemonicParsing="false" onAction="#addProductMenu" styleClass="menu-button" text="新增商品" textAlignment="CENTER" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#0000005c" />
+               </effect>
+            </AnchorPane>
+          <AnchorPane layoutY="50.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #f2f2f2;">
                <children>
-                  <SplitPane dividerPositions="0.5" maxWidth="785.0" orientation="VERTICAL" prefHeight="700.0" prefWidth="785.0" AnchorPane.topAnchor="0.0">
-                    <items>
-                      <AnchorPane maxHeight="50.0" maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefWidth="785.0" stylesheets="@../css/main.css">
+                  <Pane fx:id="addProductPane" prefHeight="650.0" prefWidth="785.0" style="-fx-background-color: #f2f2f2;">
+                     <children>
+                        <Label layoutX="45.0" layoutY="295.0" text="新增日期：" />
+                        <DatePicker fx:id="createTime" layoutX="162.0" layoutY="290.0" onAction="#click" />
+                        <Button layoutX="600.0" layoutY="465.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="34.0" prefWidth="115.0" styleClass="conform-button" text="确认新建" />
+                        <Label layoutX="58.0" layoutY="165.0" text="条形码：" />
+                        <TextField fx:id="barCode" layoutX="162.0" layoutY="160.0" onAction="#click" promptText="输入商品条形码" />
+                        <Label layoutX="432.0" layoutY="165.0" text="新商品名称：" />
+                        <TextField fx:id="productName" layoutX="555.0" layoutY="160.0" onAction="#click" promptText="输入商品名称" />
+                        <Label layoutX="71.0" layoutY="230.0" text="进价：" />
+                        <Label layoutX="471.0" layoutY="230.0" text="售价：" />
+                        <TextField fx:id="primeCost" layoutX="162.0" layoutY="225.0" onAction="#click" promptText="输入进价" />
+                        <TextField fx:id="productPrice" layoutX="555.0" layoutY="225.0" onAction="#click" promptText="输入售价" />
+                        <TextField fx:id="supply" layoutX="555.0" layoutY="290.0" onAction="#click" promptText="输入从何处进货" />
+                        <Label layoutX="458.0" layoutY="295.0" text="供货商：" />
+                        <Label fx:id="barCodeWarning" layoutX="162.0" layoutY="195.0" text="Label" textFill="RED" visible="false" />
+                        <Label fx:id="primeCostWarning" layoutX="162.0" layoutY="260.0" text="Label" textFill="RED" visible="false" />
+                        <Label fx:id="supplyWarning" layoutX="557.0" layoutY="325.0" text="Label" textFill="RED" visible="false" />
+                        <Label fx:id="productPriceWarning" layoutX="557.0" layoutY="260.0" text="Label" textFill="RED" visible="false" />
+                        <Label fx:id="productNameWarning" layoutX="557.0" layoutY="195.0" text="Label" textFill="RED" visible="false" />
+                        <Pane fx:id="confirmPane" layoutX="225.0" layoutY="160.0" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: white;" visible="false">
                            <children>
-                              <Button alignment="CENTER" layoutX="577.0" layoutY="18.0" mnemonicParsing="false" onAction="#checkProductMenu" styleClass="menu-button" text="商品查询" textAlignment="CENTER" />
-                              <Button alignment="CENTER" layoutX="682.0" layoutY="18.0" mnemonicParsing="false" onAction="#addProductMenu" styleClass="menu-button" text="新增商品" textAlignment="CENTER" />
+                              <Label layoutX="22.0" text="成功">
+                                 <font>
+                                    <Font name="Apple Chancery" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="300.0" layoutY="25.0" stroke="#b9b4b4" />
+                              <Label layoutX="95.0" layoutY="80.0" text="新商品已添加成功！" />
+                              <Button layoutX="200.0" layoutY="135.0" mnemonicParsing="false" onAction="#confirm" prefWidth="80.0" styleClass="conform-button" text="确认" />
                            </children>
-                        </AnchorPane>
-                      <AnchorPane maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="785.0">
-                           <children>
-                              <Pane fx:id="addProductPane" prefHeight="650.0" prefWidth="785.0" style="-fx-background-color: white;" visible="false">
-                                 <children>
-                                    <Label layoutX="25.0" layoutY="295.0" text="新增日期：" />
-                                    <DatePicker fx:id="createTime" layoutX="150.0" layoutY="290.0" />
-                                    <Button layoutX="600.0" layoutY="465.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="34.0" prefWidth="115.0" styleClass="conform-button" text="确认新建" />
-                                    <Label layoutX="38.0" layoutY="165.0" text="条形码：" />
-                                    <TextField fx:id="barCode" layoutX="150.0" layoutY="160.0" promptText="输入商品条形码" />
-                                    <Label layoutX="432.0" layoutY="165.0" text="新商品名称：" />
-                                    <TextField fx:id="productName" layoutX="555.0" layoutY="160.0" promptText="输入商品名称" />
-                                    <Label layoutX="51.0" layoutY="230.0" text="进价：" />
-                                    <Label layoutX="471.0" layoutY="230.0" text="售价：" />
-                                    <TextField fx:id="primeCost" layoutX="150.0" layoutY="225.0" promptText="输入进价" />
-                                    <TextField fx:id="productPrice" layoutX="555.0" layoutY="225.0" promptText="输入售价" />
-                                    <TextField fx:id="supply" layoutX="555.0" layoutY="290.0" promptText="输入从何处进货" />
-                                    <Label layoutX="458.0" layoutY="295.0" text="供货商：" />
-                                    <Label fx:id="barCodeWarning" layoutX="152.0" layoutY="195.0" text="Label" textFill="RED" visible="false" />
-                                    <Label fx:id="primeCostWarning" layoutX="152.0" layoutY="260.0" text="Label" textFill="RED" visible="false" />
-                                    <Label fx:id="supplyWarning" layoutX="557.0" layoutY="325.0" text="Label" textFill="RED" visible="false" />
-                                    <Label fx:id="productPriceWarning" layoutX="557.0" layoutY="260.0" text="Label" textFill="RED" visible="false" />
-                                    <Label fx:id="productNameWarning" layoutX="557.0" layoutY="195.0" text="Label" textFill="RED" visible="false" />
-                                    <Pane fx:id="confirmPane" layoutX="200.0" layoutY="160.0" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: white;" visible="false">
-                                       <children>
-                                          <Label layoutX="22.0" text="成功">
-                                             <font>
-                                                <Font name="Apple Chancery" size="13.0" />
-                                             </font>
-                                          </Label>
-                                          <Line endX="300.0" layoutY="25.0" stroke="#b9b4b4" />
-                                          <Label layoutX="95.0" layoutY="80.0" text="新商品已添加成功！" />
-                                          <Button layoutX="200.0" layoutY="135.0" mnemonicParsing="false" onAction="#confirm" prefWidth="80.0" styleClass="conform-button" text="确认" />
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="checkProductPane" prefHeight="650.0" prefWidth="785.0">
-                                 <children>
-                                    <Label layoutX="400.0" layoutY="30.0" text="商品条码：" />
-                                    <TextField fx:id="barInput" layoutX="480.0" layoutY="25.0" promptText="输入待查询商品条码" />
-                                    <TableView fx:id="productTable" layoutX="40.0" layoutY="120.0" prefHeight="435.0" prefWidth="702.0">
-                                      <columns>
-                                        <TableColumn fx:id="barCodeCol" prefWidth="100.0" text="商品条码" />
-                                        <TableColumn fx:id="nameCol" prefWidth="100.0" text="商品名称" />
-                                          <TableColumn fx:id="primeCol" prefWidth="100.0" text="商品进价" />
-                                          <TableColumn fx:id="saleCol" prefWidth="100.0" text="商品售价" />
-                                          <TableColumn fx:id="supplyCol" prefWidth="100.0" text="供货商" />
-                                          <TableColumn fx:id="balanceCol" prefWidth="100.0" text="库存余额" />
-                                          <TableColumn fx:id="createTimeCol" prefWidth="100.0" text="创建时间" />
-                                      </columns>
-                                    </TableView>
-                                    <Button layoutX="670.0" layoutY="25.0" mnemonicParsing="false" onAction="#checkProduct" prefWidth="75.0" styleClass="conform-button" text="查找" />
-                                 </children>
-                              </Pane>
-                           </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="checkProductPane" prefHeight="650.0" prefWidth="785.0" style="-fx-background-color: #f2f2f2;" visible="false">
+                     <children>
+                        <Label layoutX="400.0" layoutY="42.0" text="商品条码：" />
+                        <TextField fx:id="barInput" layoutX="480.0" layoutY="37.0" promptText="输入待查询商品条码" />
+                        <TableView fx:id="productTable" layoutX="50.0" layoutY="120.0" prefHeight="435.0" prefWidth="702.0">
+                          <columns>
+                            <TableColumn fx:id="barCodeCol" prefWidth="100.0" text="商品条码" />
+                            <TableColumn fx:id="nameCol" prefWidth="100.0" text="商品名称" />
+                              <TableColumn fx:id="primeCol" prefWidth="100.0" text="商品进价" />
+                              <TableColumn fx:id="saleCol" prefWidth="100.0" text="商品售价" />
+                              <TableColumn fx:id="supplyCol" prefWidth="100.0" text="供货商" />
+                              <TableColumn fx:id="balanceCol" prefWidth="100.0" text="库存余额" />
+                              <TableColumn fx:id="createTimeCol" prefWidth="100.0" text="创建时间" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="670.0" layoutY="37.0" mnemonicParsing="false" onAction="#checkProduct" prefWidth="75.0" styleClass="conform-button" text="查找" />
+                        <Label fx:id="checkWarning" layoutX="482.0" layoutY="70.0" text="Label" textFill="RED" visible="false" />
+                     </children>
+                  </Pane>
                </children>
             </AnchorPane>
-        </items>
-      </SplitPane>
+         </children>
+      </AnchorPane>
    </children>
-   <stylesheets>
-      <URL value="@../css/main.css" />
-      <URL value="@../css/main.css" />
-   </stylesheets>
 </AnchorPane>
