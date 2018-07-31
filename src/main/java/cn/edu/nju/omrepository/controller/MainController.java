@@ -173,6 +173,8 @@ public class MainController implements Initializable {
     void checkProduct(ActionEvent event) {
         String barCode = barInput.getText();
 
+        System.out.println(barCode);
+
         if (! barCode.isEmpty() && barCode.length() <= 15) {
             List<ProductVO> productVOList = tempService.checkProduct(barCode);
 

@@ -102,19 +102,19 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <Pane fx:id="checkProductPane" prefHeight="650.0" prefWidth="785.0" style="-fx-background-color: #f2f2f2;" visible="false">
+                  <Pane fx:id="checkProductPane" prefHeight="650.0" prefWidth="785.0" style="-fx-background-color: #f2f2f2;">
                      <children>
                         <Label layoutX="400.0" layoutY="42.0" text="商品条码：" />
                         <TextField fx:id="barInput" layoutX="480.0" layoutY="37.0" promptText="输入待查询商品条码" />
-                        <TableView fx:id="productTable" layoutX="50.0" layoutY="120.0" prefHeight="435.0" prefWidth="702.0">
+                        <TableView fx:id="productTable" layoutX="27.0" layoutY="120.0" prefHeight="435.0" prefWidth="742.0">
                           <columns>
-                            <TableColumn fx:id="barCodeCol" prefWidth="100.0" text="商品条码" />
-                            <TableColumn fx:id="nameCol" prefWidth="100.0" text="商品名称" />
+                            <TableColumn fx:id="barCodeCol" prefWidth="120.0" text="商品条码" />
+                            <TableColumn fx:id="nameCol" prefWidth="115.0" text="商品名称" />
                               <TableColumn fx:id="primeCol" prefWidth="100.0" text="商品进价" />
                               <TableColumn fx:id="saleCol" prefWidth="100.0" text="商品售价" />
                               <TableColumn fx:id="supplyCol" prefWidth="100.0" text="供货商" />
                               <TableColumn fx:id="balanceCol" prefWidth="100.0" text="库存余额" />
-                              <TableColumn fx:id="createTimeCol" prefWidth="100.0" text="创建时间" />
+                              <TableColumn fx:id="createTimeCol" prefWidth="105.0" text="创建时间" />
                           </columns>
                         </TableView>
                         <Button layoutX="670.0" layoutY="37.0" mnemonicParsing="false" onAction="#checkProduct" prefWidth="75.0" styleClass="conform-button" text="查找" />

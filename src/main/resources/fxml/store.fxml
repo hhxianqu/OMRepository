@@ -32,7 +32,7 @@
              <Pane layoutX="6.0" layoutY="18.0" prefHeight="70.0" prefWidth="115.0" styleClass="logo" />
              <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="265.0" mnemonicParsing="false" onAction="#countAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="信息统计" textAlignment="RIGHT">
                <font>
-                  <Font name="Heiti TC Light" size="13.0" />
+                  <Font name="Heiti TC Light" size="14.0" />
                </font>
             </Button>
              <Pane fx:id="storeShow" layoutY="165.0" prefHeight="50.0" prefWidth="5.0" style="-fx-background-color: #ed6973;" visible="false" />
