@@ -9,8 +9,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductInfo, Integer> {
 
-    List<ProductInfo> findAllByBarCode(String barCode);
+    List<ProductInfo> findAll();
 
-
-
+    List<ProductInfo> findAllByBarCodeLike(String barCode);
 }

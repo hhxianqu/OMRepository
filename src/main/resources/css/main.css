@@ -8,7 +8,7 @@ AnchorPane {
 }
 
 .menu-button {
-    -fx-background-color: transprent;
+    -fx-background-color: transparent;
 
 }
 
@@ -21,7 +21,7 @@ AnchorPane {
 }
 
 .main-menu-button {
-    -fx-background-color: transprent;
+    -fx-background-color: transparent;
     -fx-text-fill: gainsboro;
 }
 
@@ -36,7 +36,7 @@ AnchorPane {
 }
 
 .conform-button:hover {
-    -fx-background-color: transprent;
+    -fx-background-color: transparent;
     -fx-text-fill: #ed6973;
     -fx-border-color: #ed6973;
 }
@@ -66,8 +66,9 @@ AnchorPane {
 }
 
 .table-view .column-header {
-    -fx-background-color: #ffc2c7;
-    -fx-padding: 0;
+    -fx-background-color: white;
+    -fx-border-color: white #ed6973 #ed6973 white;
+    -fx-border-width: 0.03em;
 }
 
 .table-view .table-row-cell .table-cell{
@@ -76,16 +77,17 @@ AnchorPane {
 
 .table-row-cell{
     -fx-background-color: -fx-table-cell-border-color, #fff;
-    -fx-background-insets: 0, 0 0 1 0;
     -fx-text-alignment: center;
     -fx-border-color: transparent;
     -fx-pref-height: 40px;
 }
 
+.table-row-cell .cell {
+    -fx-pref-width: 122px;
+}
+
 .table-row-cell:selected {
     -fx-background-color: #ffc2c7;
-    -fx-background-insets: 0;
-    -fx-background-radius: 1;
     -fx-text-fill: white;
 }
 

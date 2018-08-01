@@ -1,8 +1,12 @@
 package cn.edu.nju.omrepository.controller;
 
+import cn.edu.nju.omrepository.OmRepositoryApplication;
 import cn.edu.nju.omrepository.service.TempService;
 import cn.edu.nju.omrepository.util.DateUtil;
-import cn.edu.nju.omrepository.util.WindowUtil;
+import cn.edu.nju.omrepository.view.CountStageView;
+import cn.edu.nju.omrepository.view.MainStageView;
+import cn.edu.nju.omrepository.view.SaleStageView;
+import cn.edu.nju.omrepository.view.StoreStageView;
 import cn.edu.nju.omrepository.vo.ProductVO;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -12,7 +16,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
@@ -105,21 +108,11 @@ public class MainController implements Initializable {
     private TableColumn<ProductVO, String> createTimeCol;
 
     @FXML
-    private Pane productShow;
-
-    @FXML
     private Label checkWarning;
-
-    @FXML
-    private Pane saleShow;
-    @FXML
-    private Pane countShow;
 
     private DateUtil dateUtil = new DateUtil();
 
     private ObservableList<ProductVO> productList = FXCollections.observableArrayList();
-
-    private WindowUtil window = new WindowUtil();
 
     @FXML
     void addProduct(ActionEvent event) throws ParseException {
@@ -149,40 +142,40 @@ public class MainController implements Initializable {
     void checkProductMenu (ActionEvent event) {
         checkProductPane.setVisible(true);
         addProductPane.setVisible(false);
+        barInput.clear();
+        productTable.getItems().clear();
     }
 
     @FXML
     void storeAboutAction (ActionEvent event) {
-        window.changeScene("/fxml/store.fxml", event);
+        OmRepositoryApplication.showView(StoreStageView.class);
     }
 
     @FXML
     void saleAboutAction (ActionEvent event) {
+        OmRepositoryApplication.showView(SaleStageView.class);
     }
 
     @FXML
     void countAboutAction (ActionEvent event) {
+        OmRepositoryApplication.showView(CountStageView.class);
     }
 
     @FXML
     void confirm (ActionEvent event) {
-        window.changeScene("/fxml/main.fxml", event);
+        OmRepositoryApplication.showView(MainStageView.class);
     }
 
     @FXML
     void checkProduct(ActionEvent event) {
         String barCode = barInput.getText();
 
-        System.out.println(barCode);
-
         if (! barCode.isEmpty() && barCode.length() <= 15) {
             List<ProductVO> productVOList = tempService.checkProduct(barCode);
 
             productTable.getItems().clear();
             productList.clear();
-
             productList.addAll(productVOList);
-
             productTable.setItems(productList);
 
             barCodeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getBarCode()));
@@ -214,8 +207,7 @@ public class MainController implements Initializable {
         createTime.setValue(LocalDate.now());
         createTime.setShowWeekNumbers(true);
 
-        productAboutButton.setStyle("--fx-text-fill: white; -fx-background-color: #3b3b3b;");
-        productShow.setVisible(true);
+        productAboutButton.setStyle("-fx-text-fill: white; -fx-background-color: #3b3b3b;");
         addProductPane.setVisible(true);
 
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {

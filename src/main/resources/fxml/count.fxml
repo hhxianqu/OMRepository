@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1050.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.nju.omrepository.controller.CountController">
+   <children>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="150.0" style="-fx-background-color: #3e3e3e;">
+         <children>
+             <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="115.0" mnemonicParsing="false" onAction="#productAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="商品查看" textAlignment="RIGHT">
+                 <font>
+                     <Font name="Heiti TC Light" size="14.0" />
+                 </font>
+             </Button>
+             <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="165.0" mnemonicParsing="false" onAction="#storeAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="仓库查看" textAlignment="RIGHT">
+                 <font>
+                     <Font name="Heiti TC Light" size="14.0" />
+                 </font>
+             </Button>
+             <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="215.0" mnemonicParsing="false" onAction="#saleAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="销售查看" textAlignment="RIGHT">
+                 <font>
+                     <Font name="Heiti TC Light" size="14.0" />
+                 </font>
+             </Button>
+             <Pane layoutX="6.0" layoutY="18.0" prefHeight="70.0" prefWidth="115.0" styleClass="logo" />
+             <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="265.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="145.0" style="-fx-background-color: #3b3b3b;" styleClass="main-menu-button" text="信息统计" textAlignment="RIGHT">
+               <font>
+                  <Font name="Heiti TC Light" size="14.0" />
+               </font>
+            </Button>
+             <Pane layoutY="265.0" prefHeight="50.0" prefWidth="5.0" style="-fx-background-color: #ed6973;" />
+         </children>
+      </AnchorPane>
+    <AnchorPane layoutX="150.0" minHeight="0.0" minWidth="0.0" prefWidth="900.0">
+         <children>
+          <AnchorPane maxHeight="50.0" minHeight="0.0" minWidth="0.0" prefHeight="49.0" prefWidth="900.0" stylesheets="@../css/main.css">
+               <effect>
+                  <DropShadow color="#0000005b" />
+               </effect>
+            </AnchorPane>
+          <AnchorPane layoutY="50.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

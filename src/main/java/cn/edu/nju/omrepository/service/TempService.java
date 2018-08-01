@@ -9,4 +9,6 @@ public interface TempService {
     void addProduct(ProductVO productVO);
 
     List<ProductVO> checkProduct(String barCode);
+
+    List<ProductVO> checkAllProduct();
 }

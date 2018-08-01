@@ -51,12 +51,26 @@ public class TempServiceImpl implements TempService {
 
     @Override
     public List<ProductVO> checkProduct(String barCode) {
-        List<ProductInfo> productList = productRepository.findAllByBarCode(barCode);
+        List<ProductInfo> productList = productRepository.findAllByBarCodeLike("%" + barCode + "%");
         List<ProductVO> resultList = new ArrayList<>();
 
         for (ProductInfo productInfo : productList) {
             ProductVO vo = new ProductVO();
             resultList.add(convertPOtoVO(vo, productInfo));
+        }
+        return resultList;
+    }
+
+    @Override
+    public List<ProductVO> checkAllProduct() {
+        List<ProductInfo> productList = productRepository.findAll();
+        List<ProductVO> resultList = new ArrayList<>();
+
+        for (ProductInfo productInfo : productList) {
+            if (productInfo.getBalance() > 0) {
+                ProductVO vo = new ProductVO();
+                resultList.add(convertPOtoVO(vo, productInfo));
+            }
         }
         return resultList;
     }
