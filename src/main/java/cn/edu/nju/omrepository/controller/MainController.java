@@ -262,13 +262,26 @@ public class MainController implements Initializable {
             test = false;
         }
 
-//        int num = Integer.valueOf(primeCost.getText());
-
+        try {
+            int num = Integer.valueOf(primeCost.getText());
+        } catch (NumberFormatException e) {
+            primeCostWarning.setVisible(true);
+            primeCostWarning.setText("请正确输入数字");
+            test = false;
+        }
 
 
         if (productPrice.getText().isEmpty()) {
             productPriceWarning.setVisible(true);
             productPriceWarning.setText("请输入售价！");
+            test = false;
+        }
+
+        try {
+            int num = Integer.valueOf(productPrice.getText());
+        } catch (NumberFormatException e) {
+            productPriceWarning.setVisible(true);
+            productPriceWarning.setText("请正确输入数字");
             test = false;
         }
 
