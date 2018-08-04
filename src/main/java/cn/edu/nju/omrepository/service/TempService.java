@@ -8,7 +8,9 @@ public interface TempService {
 
     void addProduct(ProductVO productVO);
 
-    List<ProductVO> checkProduct(String barCode);
+    List<ProductVO> checkProductByBarcode(String barCode);
+
+    List<ProductVO> checkProductByName(String name);
 
     List<ProductVO> checkAllProduct();
 }

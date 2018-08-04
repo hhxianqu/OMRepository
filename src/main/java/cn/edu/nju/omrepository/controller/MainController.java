@@ -63,6 +63,9 @@ public class MainController implements Initializable {
     private TextField barInput;
 
     @FXML
+    private TextField nameInput;
+
+    @FXML
     private Button productAboutButton;
 
     @FXML
@@ -82,6 +85,12 @@ public class MainController implements Initializable {
 
     @FXML
     private Pane confirmPane;
+
+    @FXML
+    private Pane barCheckPane;
+
+    @FXML
+    private Pane nameCheckPane;
 
     @FXML
     private TableView<ProductVO> productTable;
@@ -110,9 +119,12 @@ public class MainController implements Initializable {
     @FXML
     private Label checkWarning;
 
+
     private DateUtil dateUtil = new DateUtil();
 
     private ObservableList<ProductVO> productList = FXCollections.observableArrayList();
+
+
 
     @FXML
     void addProduct(ActionEvent event) throws ParseException {
@@ -139,11 +151,23 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void checkProductMenu (ActionEvent event) {
+    void checkProductMenuByCode (ActionEvent event) {
         checkProductPane.setVisible(true);
         addProductPane.setVisible(false);
         barInput.clear();
         productTable.getItems().clear();
+        barCheckPane.setVisible(true);
+        nameCheckPane.setVisible(false);
+    }
+
+    @FXML
+    void checkProductMenuByName (ActionEvent event) {
+        checkProductPane.setVisible(true);
+        addProductPane.setVisible(false);
+        barInput.clear();
+        productTable.getItems().clear();
+        barCheckPane.setVisible(false);
+        nameCheckPane.setVisible(true);
     }
 
     @FXML
@@ -167,29 +191,37 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void checkProduct(ActionEvent event) {
+    void checkProductByBar(ActionEvent event) {
+        productList.clear();
+        productTable.getItems().clear();
+
         String barCode = barInput.getText();
 
         if (! barCode.isEmpty() && barCode.length() <= 15) {
-            List<ProductVO> productVOList = tempService.checkProduct(barCode);
-
-            productTable.getItems().clear();
-            productList.clear();
+            List<ProductVO> productVOList = tempService.checkProductByBarcode(barCode);
             productList.addAll(productVOList);
-            productTable.setItems(productList);
-
-            barCodeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getBarCode()));
-            nameCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductName()));
-            primeCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getPrimeCost()).asObject());
-            saleCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductPrice().toString()));
-            supplyCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getSupply()));
-            balanceCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getBalance()).asObject());
-            createTimeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCreateTime().toString().substring(0, 10)));
+            drawTable();
         } else {
             checkWarning.setVisible(true);
             checkWarning.setText("请正确输入条码！");
         }
+    }
 
+    @FXML
+    void checkProductByName(ActionEvent event) {
+        productList.clear();
+        productTable.getItems().clear();
+
+        String productName = nameInput.getText();
+
+        if (! productName.isEmpty() && productName.length() <= 20) {
+            List<ProductVO> productVOList = tempService.checkProductByName(productName);
+            productList.addAll(productVOList);
+            drawTable();
+        } else {
+            checkWarning.setVisible(true);
+            checkWarning.setText("请正确输入商品名称！");
+        }
     }
 
     @FXML
@@ -227,6 +259,7 @@ public class MainController implements Initializable {
             }
         };
         createTime.setDayCellFactory(dayCellFactory);
+
     }
 
 
@@ -298,6 +331,19 @@ public class MainController implements Initializable {
 
         return test;
 
+    }
+
+    private void drawTable() {
+
+        productTable.setItems(productList);
+
+        barCodeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getBarCode()));
+        nameCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductName()));
+        primeCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getPrimeCost()).asObject());
+        saleCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductPrice().toString()));
+        supplyCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getSupply()));
+        balanceCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getBalance()).asObject());
+        createTimeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCreateTime().toString().substring(0, 10)));
     }
 
 }

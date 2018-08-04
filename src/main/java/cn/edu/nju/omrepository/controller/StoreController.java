@@ -5,7 +5,6 @@ import cn.edu.nju.omrepository.service.TempService;
 import cn.edu.nju.omrepository.view.CountStageView;
 import cn.edu.nju.omrepository.view.MainStageView;
 import cn.edu.nju.omrepository.view.SaleStageView;
-import cn.edu.nju.omrepository.view.StoreStageView;
 import cn.edu.nju.omrepository.vo.ProductVO;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -15,7 +14,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 import javax.annotation.Resource;
@@ -169,7 +171,7 @@ public class StoreController implements Initializable {
         String barCodeInput = barCode.getText();
 
         if (! barCodeInput.isEmpty() && barCodeInput.length() <= 15) {
-            List<ProductVO> productVOList = tempService.checkProduct(barCodeInput);
+            List<ProductVO> productVOList = tempService.checkProductByBarcode(barCodeInput);
 
             productTable.getItems().clear();
             productList.clear();

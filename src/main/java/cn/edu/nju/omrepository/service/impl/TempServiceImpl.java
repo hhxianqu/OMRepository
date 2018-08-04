@@ -5,7 +5,6 @@ import cn.edu.nju.omrepository.repository.ProductRepository;
 import cn.edu.nju.omrepository.service.TempService;
 import cn.edu.nju.omrepository.vo.ProductVO;
 import org.springframework.stereotype.Service;
-import sun.security.krb5.internal.Ticket;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -50,7 +49,7 @@ public class TempServiceImpl implements TempService {
     }
 
     @Override
-    public List<ProductVO> checkProduct(String barCode) {
+    public List<ProductVO> checkProductByBarcode(String barCode) {
         List<ProductInfo> productList = productRepository.findAllByBarCodeLike("%" + barCode + "%");
         List<ProductVO> resultList = new ArrayList<>();
 
@@ -75,5 +74,16 @@ public class TempServiceImpl implements TempService {
         return resultList;
     }
 
+    @Override
+    public List<ProductVO> checkProductByName(String name) {
+        List<ProductInfo> productList = productRepository.findAllByProductNameLike("%" + name + "%");
+        List<ProductVO> resultList = new ArrayList<>();
+
+        for (ProductInfo productInfo : productList) {
+            ProductVO vo = new ProductVO();
+            resultList.add(convertPOtoVO(vo, productInfo));
+        }
+        return resultList;
+    }
 
 }

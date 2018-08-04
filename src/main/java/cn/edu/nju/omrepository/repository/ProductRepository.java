@@ -12,4 +12,6 @@ public interface ProductRepository extends JpaRepository<ProductInfo, Integer> {
     List<ProductInfo> findAll();
 
     List<ProductInfo> findAllByBarCodeLike(String barCode);
+
+    List<ProductInfo> findAllByProductNameLike(String name);
 }
