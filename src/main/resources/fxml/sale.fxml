@@ -43,7 +43,7 @@
           <AnchorPane maxHeight="50.0" minHeight="0.0" minWidth="0.0" prefHeight="49.0" prefWidth="900.0" stylesheets="@../css/main.css">
                <children>
                   <Button alignment="CENTER" layoutX="681.0" layoutY="18.0" mnemonicParsing="false" onAction="#orderPaneAction" styleClass="menu-button" text="新增订单" textAlignment="CENTER" />
-                  <Button alignment="CENTER" layoutX="786.0" layoutY="18.0" mnemonicParsing="false" onAction="#addMarket" styleClass="menu-button" text="新增超市" textAlignment="CENTER" />
+                  <Button alignment="CENTER" layoutX="786.0" layoutY="18.0" mnemonicParsing="false" onAction="#addShopAction" styleClass="menu-button" text="新增超市" textAlignment="CENTER" />
                </children>
                <effect>
                   <DropShadow color="#0000005b" />
@@ -52,7 +52,24 @@
           <AnchorPane layoutY="50.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;">
                <children>
                   <Pane fx:id="orderMenu" prefHeight="650.0" prefWidth="900.0" visible="false" />
-                  <Pane fx:id="addMarketMenu" prefHeight="650.0" prefWidth="900.0" />
+                  <Pane fx:id="addMarketMenu" prefHeight="650.0" prefWidth="900.0">
+                     <children>
+                        <Label layoutX="100.0" layoutY="65.0" text="新增超市" textFill="#ed6973">
+                           <font>
+                              <Font name="Heiti TC Light" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="250.0" layoutY="142.0" text="超市名称 :" />
+                        <Label layoutX="250.0" layoutY="217.0" text="超市地点 :" />
+                        <Label layoutX="250.0" layoutY="297.0" text="驻场费用 :" />
+                        <TextField fx:id="shopName" layoutX="425.0" layoutY="140.0" onMouseClicked="#onClick" />
+                        <TextField fx:id="shopAddress" layoutX="425.0" layoutY="215.0" onMouseClicked="#onClick" />
+                        <TextField fx:id="shopPrice" layoutX="425.0" layoutY="295.0" onMouseClicked="#onClick" />
+                        <Button layoutX="665.0" layoutY="400.0" mnemonicParsing="false" onAction="#addShop" prefWidth="80.0" styleClass="conform-button" text="新建" />
+                        <Label fx:id="shopNameWarning" layoutX="427.0" layoutY="170.0" text="Label" textFill="RED" visible="false" />
+                        <Label fx:id="shopAddressWarning" layoutX="427.0" layoutY="245.0" text="Label" textFill="RED" visible="false" />
+                        <Label fx:id="shopPriceWarning" layoutX="427.0" layoutY="325.0" text="Label" textFill="RED" visible="false" />
+                     </children></Pane>
                </children>
             </AnchorPane>
          </children>

@@ -70,20 +70,20 @@
             </AnchorPane>
           <AnchorPane layoutY="50.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;">
                <children>
-                  <Pane fx:id="addProductPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;" visible="false">
+                  <Pane fx:id="addProductPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;">
                      <children>
                         <Label layoutX="89.0" layoutY="325.0" text="新增日期：" />
-                        <DatePicker fx:id="createTime" layoutX="200.0" layoutY="320.0" onAction="#click" />
+                        <DatePicker fx:id="createTime" layoutX="200.0" layoutY="320.0" onMouseClicked="#click" />
                         <Button layoutX="630.0" layoutY="465.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="34.0" prefWidth="115.0" styleClass="conform-button" text="确认新建" />
                         <Label layoutX="102.0" layoutY="195.0" text="条形码：" />
-                        <TextField fx:id="barCode" layoutX="200.0" layoutY="190.0" onAction="#click" promptText="输入商品条形码" />
+                        <TextField fx:id="barCode" layoutX="200.0" layoutY="190.0" onMouseClicked="#click" promptText="输入商品条形码" />
                         <Label layoutX="479.0" layoutY="195.0" text="新商品名称：" />
-                        <TextField fx:id="productName" layoutX="585.0" layoutY="190.0" onAction="#click" promptText="输入商品名称" />
+                        <TextField fx:id="productName" layoutX="585.0" layoutY="190.0" onMouseClicked="#click" promptText="输入商品名称" />
                         <Label layoutX="115.0" layoutY="260.0" text="进价：" />
                         <Label layoutX="518.0" layoutY="260.0" text="售价：" />
-                        <TextField fx:id="primeCost" layoutX="200.0" layoutY="255.0" onAction="#click" promptText="输入进价" />
-                        <TextField fx:id="productPrice" layoutX="585.0" layoutY="255.0" onAction="#click" promptText="输入售价" />
-                        <TextField fx:id="supply" layoutX="585.0" layoutY="320.0" onAction="#click" promptText="输入从何处进货" />
+                        <TextField fx:id="primeCost" layoutX="200.0" layoutY="255.0" onMouseClicked="#click" promptText="输入进价" />
+                        <TextField fx:id="productPrice" layoutX="585.0" layoutY="255.0" onMouseClicked="#click" promptText="输入售价" />
+                        <TextField fx:id="supply" layoutX="585.0" layoutY="320.0" onMouseClicked="#click" promptText="输入从何处进货" />
                         <Label layoutX="505.0" layoutY="325.0" text="供货商：" />
                         <Label fx:id="barCodeWarning" layoutX="202.0" layoutY="220.0" text="Label" textFill="RED" visible="false" />
                         <Label fx:id="primeCostWarning" layoutX="202.0" layoutY="285.0" text="Label" textFill="RED" visible="false" />
@@ -109,19 +109,19 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane fx:id="checkProductPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;">
+                  <Pane fx:id="checkProductPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;" visible="false">
                      <children>
                         <Pane fx:id="nameCheckPane" layoutX="515.0" prefHeight="100.0" prefWidth="385.0">
                            <children>
                               <Button layoutX="275.0" layoutY="37.0" mnemonicParsing="false" onAction="#checkProductByName" prefWidth="75.0" styleClass="conform-button" text="查找" />
-                              <TextField fx:id="nameInput" layoutX="85.0" layoutY="37.0" promptText="输入待查询商品名称" />
+                              <TextField fx:id="nameInput" layoutX="85.0" layoutY="37.0" onInputMethodTextChanged="#checkProductByName" promptText="输入待查询商品名称" />
                               <Label layoutY="42.0" text="商品名称：" />
                            </children>
                         </Pane>
                         <Pane fx:id="barCheckPane" layoutX="515.0" prefHeight="100.0" prefWidth="385.0" visible="false">
                            <children>
                               <Button layoutX="275.0" layoutY="37.0" mnemonicParsing="false" onAction="#checkProductByBar" prefWidth="75.0" styleClass="conform-button" text="查找" />
-                              <TextField fx:id="barInput" layoutX="85.0" layoutY="37.0" promptText="输入待查询商品条码" />
+                              <TextField fx:id="barInput" layoutX="85.0" layoutY="37.0" onInputMethodTextChanged="#checkProductByBar" promptText="输入待查询商品条码" />
                               <Label layoutY="42.0" text="商品条码：" />
                            </children>
                         </Pane>

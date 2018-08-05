@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
@@ -29,8 +30,6 @@ import java.util.ResourceBundle;
 
 @FXMLController
 public class MainController implements Initializable {
-
-    private ProductVO productVO = new ProductVO();
 
     @Resource
     private TempService tempService;
@@ -119,16 +118,14 @@ public class MainController implements Initializable {
     @FXML
     private Label checkWarning;
 
-
     private DateUtil dateUtil = new DateUtil();
 
     private ObservableList<ProductVO> productList = FXCollections.observableArrayList();
 
-
+    private ProductVO productVO = new ProductVO();
 
     @FXML
     void addProduct(ActionEvent event) throws ParseException {
-
         if (doWarning()) {
             productVO.setBarCode(barCode.getText());
             productVO.setProductName(productName.getText());
@@ -225,7 +222,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void click(ActionEvent event) {
+    void click(MouseEvent event) {
         supplyWarning.setVisible(false);
         productPriceWarning.setVisible(false);
         productNameWarning.setVisible(false);
@@ -313,9 +310,9 @@ public class MainController implements Initializable {
         try {
             int num = Integer.valueOf(productPrice.getText());
         } catch (NumberFormatException e) {
+            test = false;
             productPriceWarning.setVisible(true);
             productPriceWarning.setText("请正确输入数字");
-            test = false;
         }
 
         if (supply.getText().isEmpty()) {
