@@ -32,6 +32,12 @@ public class SaleController implements Initializable {
     private TextField shopPrice;
 
     @FXML
+    private TextField beginTime;
+
+    @FXML
+    private TextField endTime;
+
+    @FXML
     private Pane addMarketMenu;
 
     @FXML
@@ -45,6 +51,12 @@ public class SaleController implements Initializable {
 
     @FXML
     private Label shopPriceWarning;
+
+    @FXML
+    private Label beginTimeWarning;
+
+    @FXML
+    private Label endTimeWarning;
 
     @FXML
     void productAboutAction(ActionEvent event) {
@@ -82,12 +94,12 @@ public class SaleController implements Initializable {
             shopVO.setShopName(shopName.getText());
             shopVO.setShopAddress(shopAddress.getText());
             shopVO.setShopPrice(Integer.valueOf(shopPrice.getText()));
+            shopVO.setBeginTime(beginTime.getText());
+            shopVO.setEndTime(endTime.getText());
 
             shopService.addShop(shopVO);
 
         }
-
-
     }
 
     @FXML
@@ -141,6 +153,25 @@ public class SaleController implements Initializable {
             test = false;
         }
 
+        if (beginTime.getText().isEmpty()) {
+            beginTimeWarning.setVisible(true);
+            beginTimeWarning.setText("请输入开始结账日期");
+            test = false;
+        } else if (beginTime.getText().length() > 2) {
+            beginTimeWarning.setVisible(true);
+            beginTimeWarning.setText("仅需要输入日期");
+            test = false;
+        }
+
+        if (endTime.getText().isEmpty()) {
+            endTimeWarning.setVisible(true);
+            endTimeWarning.setText("请输入结账截止日期");
+            test = false;
+        } else if (endTime.getText().length() > 2) {
+            endTimeWarning.setVisible(true);
+            endTimeWarning.setText("仅需要输入日期");
+            test = false;
+        }
 
         return test;
     }

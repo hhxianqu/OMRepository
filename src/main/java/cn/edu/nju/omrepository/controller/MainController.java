@@ -161,7 +161,7 @@ public class MainController implements Initializable {
     void checkProductMenuByName (ActionEvent event) {
         checkProductPane.setVisible(true);
         addProductPane.setVisible(false);
-        barInput.clear();
+        nameInput.clear();
         productTable.getItems().clear();
         barCheckPane.setVisible(false);
         nameCheckPane.setVisible(true);
@@ -184,7 +184,7 @@ public class MainController implements Initializable {
 
     @FXML
     void confirm (ActionEvent event) {
-        OmRepositoryApplication.showView(MainStageView.class);
+        OmRepositoryApplication.showView(StoreStageView.class);
     }
 
     @FXML

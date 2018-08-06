@@ -5,6 +5,8 @@ public class ShopVO {
     private String shopName;
     private String shopAddress;
     private int shopPrice;
+    private String beginTime;
+    private String endTime;
 
     public ShopVO() {
     }
@@ -31,5 +33,21 @@ public class ShopVO {
 
     public void setShopPrice(int shopPrice) {
         this.shopPrice = shopPrice;
+    }
+
+    public String getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 }

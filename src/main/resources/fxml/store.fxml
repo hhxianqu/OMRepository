@@ -42,9 +42,13 @@
          <children>
           <AnchorPane maxHeight="50.0" minHeight="0.0" minWidth="0.0" prefHeight="49.0" prefWidth="900.0" stylesheets="@../css/main.css">
                <children>
-                  <Button alignment="CENTER" layoutX="694.0" layoutY="18.0" mnemonicParsing="false" onAction="#addToStoreAction" styleClass="menu-button" text="商品入库" textAlignment="CENTER" />
-                  <Button alignment="CENTER" layoutX="787.0" layoutY="18.0" mnemonicParsing="false" onAction="#outStoreAction" styleClass="menu-button" text="下单／出库" textAlignment="CENTER" />
-                  <Button layoutX="594.0" layoutY="18.0" mnemonicParsing="false" onAction="#checkAll" styleClass="menu-button" text="库存查看" />
+                  <Button layoutX="685.0" layoutY="18.0" mnemonicParsing="false" onAction="#checkAll" styleClass="menu-button" text="库存查看" />
+                  <MenuButton layoutX="765.0" layoutY="13.0" mnemonicParsing="false" text="商品入库">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#addToStoreActionByName" text="名字查询" />
+                      <MenuItem mnemonicParsing="false" onAction="#addToStoreActionByBar" text="条码查询" />
+                    </items>
+                  </MenuButton>
                </children>
                <effect>
                   <DropShadow color="#0000005b" />
@@ -77,7 +81,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane fx:id="addToStorePane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;" visible="false">
+                  <Pane fx:id="addToStorePane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;">
                      <children>
                         <Pane fx:id="confirmPane" layoutX="275.0" layoutY="160.0" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: white;" visible="false">
                            <children>
@@ -91,7 +95,6 @@
                               <Button layoutX="200.0" layoutY="135.0" mnemonicParsing="false" onAction="#confirm" prefWidth="80.0" styleClass="conform-button" text="确认" />
                            </children>
                         </Pane>
-                        <TextField fx:id="barCode" layoutX="480.0" layoutY="50.0" promptText="请输入商品条码" />
                         <TableView fx:id="productTable" layoutX="27.0" layoutY="125.0" prefHeight="450.0" prefWidth="840.0">
                            <columns>
                               <TableColumn fx:id="barCodeCol" minWidth="120.0" prefWidth="120.0" text="商品条码" />
@@ -103,12 +106,23 @@
                               <TableColumn fx:id="createTimeCol" minWidth="120.0" prefWidth="105.0" text="创建时间" />
                            </columns>
                         </TableView>
-                        <Button layoutX="672.0" layoutY="50.0" mnemonicParsing="false" onAction="#checkProduct" prefWidth="75.0" styleClass="conform-button" text="查找" />
-                        <Label layoutX="402.0" layoutY="55.0" text="商品条码：" />
                         <Label fx:id="checkWarning" layoutX="482.0" layoutY="83.0" text="Label" textFill="RED" visible="false" />
                      </children>
                   </Pane>
-                  <Pane fx:id="outStorePane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;" visible="false" />
+                  <Pane fx:id="barCheckPane" layoutX="515.0" prefHeight="100.0" prefWidth="385.0" visible="false">
+                     <children>
+                        <Button layoutX="275.0" layoutY="37.0" mnemonicParsing="false" onAction="#checkProductByBar" prefWidth="75.0" styleClass="conform-button" text="查找" />
+                        <TextField fx:id="barCode" layoutX="85.0" layoutY="37.0" onInputMethodTextChanged="#checkProductByBar" promptText="输入待查询商品条码" />
+                        <Label layoutY="42.0" text="商品条码：" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="nameCheckPane" layoutX="515.0" prefHeight="100.0" prefWidth="385.0">
+                     <children>
+                        <Button layoutX="275.0" layoutY="37.0" mnemonicParsing="false" onAction="#checkProductByName" prefWidth="75.0" styleClass="conform-button" text="查找" />
+                        <TextField fx:id="nameInput" layoutX="85.0" layoutY="37.0" onInputMethodTextChanged="#checkProductByName" promptText="输入待查询商品名称" />
+                        <Label layoutY="42.0" text="商品名称：" />
+                     </children>
+                  </Pane>
                </children>
             </AnchorPane>
          </children>

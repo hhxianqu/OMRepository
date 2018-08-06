@@ -13,6 +13,8 @@ public class ShopServiceImpl implements ShopService {
         po.setShopAddress(vo.getShopAddress());
         po.setShopName(vo.getShopName());
         po.setShopPrice(vo.getShopPrice());
+        po.setBeginTime(vo.getBeginTime());
+        po.setEndTime(vo.getEndTime());
     }
 
 

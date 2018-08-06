@@ -51,7 +51,7 @@
             </AnchorPane>
           <AnchorPane layoutY="50.0" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;">
                <children>
-                  <Pane fx:id="orderMenu" prefHeight="650.0" prefWidth="900.0" visible="false" />
+                  <Pane fx:id="orderMenu" prefHeight="650.0" prefWidth="900.0" />
                   <Pane fx:id="addMarketMenu" prefHeight="650.0" prefWidth="900.0">
                      <children>
                         <Label layoutX="100.0" layoutY="65.0" text="新增超市" textFill="#ed6973">
@@ -60,15 +60,21 @@
                            </font>
                         </Label>
                         <Label layoutX="250.0" layoutY="142.0" text="超市名称 :" />
-                        <Label layoutX="250.0" layoutY="217.0" text="超市地点 :" />
-                        <Label layoutX="250.0" layoutY="297.0" text="驻场费用 :" />
-                        <TextField fx:id="shopName" layoutX="425.0" layoutY="140.0" onMouseClicked="#onClick" />
-                        <TextField fx:id="shopAddress" layoutX="425.0" layoutY="215.0" onMouseClicked="#onClick" />
-                        <TextField fx:id="shopPrice" layoutX="425.0" layoutY="295.0" onMouseClicked="#onClick" />
-                        <Button layoutX="665.0" layoutY="400.0" mnemonicParsing="false" onAction="#addShop" prefWidth="80.0" styleClass="conform-button" text="新建" />
+                        <Label layoutX="250.0" layoutY="212.0" text="超市地点 :" />
+                        <Label layoutX="250.0" layoutY="282.0" text="驻场费用 :" />
+                        <TextField fx:id="shopName" layoutX="425.0" layoutY="140.0" onMouseClicked="#onClick" prefWidth="180.0" promptText="请输入超市名称" />
+                        <TextField fx:id="shopAddress" layoutX="425.0" layoutY="210.0" onMouseClicked="#onClick" prefWidth="180.0" promptText="请输入超市地点" />
+                        <TextField fx:id="shopPrice" layoutX="425.0" layoutY="280.0" onMouseClicked="#onClick" prefWidth="180.0" promptText="请输入年费用" />
+                        <Button layoutX="665.0" layoutY="515.0" mnemonicParsing="false" onAction="#addShop" prefWidth="80.0" styleClass="conform-button" text="新建" />
                         <Label fx:id="shopNameWarning" layoutX="427.0" layoutY="170.0" text="Label" textFill="RED" visible="false" />
-                        <Label fx:id="shopAddressWarning" layoutX="427.0" layoutY="245.0" text="Label" textFill="RED" visible="false" />
-                        <Label fx:id="shopPriceWarning" layoutX="427.0" layoutY="325.0" text="Label" textFill="RED" visible="false" />
+                        <Label fx:id="shopAddressWarning" layoutX="427.0" layoutY="240.0" text="Label" textFill="RED" visible="false" />
+                        <Label fx:id="shopPriceWarning" layoutX="427.0" layoutY="310.0" text="Label" textFill="RED" visible="false" />
+                        <Label layoutX="250.0" layoutY="352.0" text="结账日期 :" />
+                        <Label layoutX="250.0" layoutY="422.0" text="截止日期 :" />
+                        <TextField fx:id="beginTime" layoutX="425.0" layoutY="350.0" onMouseClicked="#onClick" prefWidth="180.0" promptText="请输入每月对账开始日" />
+                        <TextField fx:id="endTime" layoutX="425.0" layoutY="420.0" onMouseClicked="#onClick" prefWidth="180.0" promptText="请输入每月对账结束日" />
+                        <Label fx:id="beginTimeWarning" layoutX="427.0" layoutY="380.0" text="Label" textFill="RED" visible="false" />
+                        <Label fx:id="endTimeWarning" layoutX="427.0" layoutY="450.0" text="Label" textFill="RED" visible="false" />
                      </children></Pane>
                </children>
             </AnchorPane>

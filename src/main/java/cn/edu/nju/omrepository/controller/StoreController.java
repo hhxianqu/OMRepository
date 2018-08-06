@@ -38,10 +38,17 @@ public class StoreController implements Initializable {
     private Pane confirmPane;
 
     @FXML
-    private Pane outStorePane;
+    private TextField barCode;
 
     @FXML
-    private TextField barCode;
+    private Pane nameCheckPane;
+
+    @FXML
+    private Pane barCheckPane;
+
+    @FXML
+    private TextField nameInput;
+
 
     @FXML
     private TableView<ProductVO> productTable;
@@ -121,17 +128,26 @@ public class StoreController implements Initializable {
     }
 
     @FXML
-    void addToStoreAction (ActionEvent event) {
+    void addToStoreActionByBar (ActionEvent event) {
         addToStorePane.setVisible(true);
-        outStorePane.setVisible(false);
         allProductPane.setVisible(false);
+        barCheckPane.setVisible(true);
+        nameCheckPane.setVisible(false);
+
+        barCode.clear();
+        productTable.getItems().clear();
     }
 
     @FXML
-    void outStoreAction (ActionEvent event) {
-        addToStorePane.setVisible(false);
-        outStorePane.setVisible(true);
+    void addToStoreActionByName (ActionEvent event) {
+        addToStorePane.setVisible(true);
         allProductPane.setVisible(false);
+        barCheckPane.setVisible(false);
+        nameCheckPane.setVisible(true);
+
+        nameInput.clear();
+        productTable.getItems().clear();
+
     }
 
     @FXML
@@ -143,7 +159,8 @@ public class StoreController implements Initializable {
     void checkAll(ActionEvent event) {
         allProductPane.setVisible(true);
         addToStorePane.setVisible(false);
-        outStorePane.setVisible(false);
+        barCheckPane.setVisible(false);
+        nameCheckPane.setVisible(false);
 
         List<ProductVO> productVOList = tempService.checkAllProduct();
 
@@ -165,17 +182,15 @@ public class StoreController implements Initializable {
     }
 
     @FXML
-    void checkProduct(ActionEvent event) {
+    void checkProductByBar(ActionEvent event) {
         addToStorePane.setVisible(true);
+        productTable.getItems().clear();
+        productList.clear();
 
         String barCodeInput = barCode.getText();
 
         if (! barCodeInput.isEmpty() && barCodeInput.length() <= 15) {
             List<ProductVO> productVOList = tempService.checkProductByBarcode(barCodeInput);
-
-            productTable.getItems().clear();
-            productList.clear();
-
             productList.addAll(productVOList);
 
             productTable.setItems(productList);
@@ -193,6 +208,38 @@ public class StoreController implements Initializable {
         }
 
     }
+
+
+    @FXML
+    void checkProductByName(ActionEvent event) {
+        productList.clear();
+        productTable.getItems().clear();
+
+        String productName = nameInput.getText();
+
+        if (! productName.isEmpty() && productName.length() <= 20) {
+            List<ProductVO> productVOList = tempService.checkProductByName(productName);
+            productList.addAll(productVOList);
+
+            productTable.setItems(productList);
+
+            barCodeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getBarCode()));
+            nameCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductName()));
+            primeCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getPrimeCost()).asObject());
+            saleCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductPrice().toString()));
+            supplyCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getSupply()));
+            balanceCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getBalance()).asObject());
+            createTimeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCreateTime().toString().substring(0, 10)));
+
+        } else {
+            checkWarning.setVisible(true);
+            checkWarning.setText("请正确输入商品名称！");
+        }
+    }
+
+
+
+
 
 
 }

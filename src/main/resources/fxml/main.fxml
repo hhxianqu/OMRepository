@@ -114,14 +114,14 @@
                         <Pane fx:id="nameCheckPane" layoutX="515.0" prefHeight="100.0" prefWidth="385.0">
                            <children>
                               <Button layoutX="275.0" layoutY="37.0" mnemonicParsing="false" onAction="#checkProductByName" prefWidth="75.0" styleClass="conform-button" text="查找" />
-                              <TextField fx:id="nameInput" layoutX="85.0" layoutY="37.0" onInputMethodTextChanged="#checkProductByName" promptText="输入待查询商品名称" />
+                              <TextField fx:id="nameInput" layoutX="85.0" layoutY="37.0" promptText="输入待查询商品名称" />
                               <Label layoutY="42.0" text="商品名称：" />
                            </children>
                         </Pane>
                         <Pane fx:id="barCheckPane" layoutX="515.0" prefHeight="100.0" prefWidth="385.0" visible="false">
                            <children>
                               <Button layoutX="275.0" layoutY="37.0" mnemonicParsing="false" onAction="#checkProductByBar" prefWidth="75.0" styleClass="conform-button" text="查找" />
-                              <TextField fx:id="barInput" layoutX="85.0" layoutY="37.0" onInputMethodTextChanged="#checkProductByBar" promptText="输入待查询商品条码" />
+                              <TextField fx:id="barInput" layoutX="85.0" layoutY="37.0" promptText="输入待查询商品条码" />
                               <Label layoutY="42.0" text="商品条码：" />
                            </children>
                         </Pane>
