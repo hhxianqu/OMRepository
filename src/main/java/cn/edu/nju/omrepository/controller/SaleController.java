@@ -59,6 +59,9 @@ public class SaleController implements Initializable {
     private Label endTimeWarning;
 
     @FXML
+    private Pane confirmPane;
+
+    @FXML
     void productAboutAction(ActionEvent event) {
         OmRepositoryApplication.showView(MainStageView.class);
     }
@@ -99,6 +102,8 @@ public class SaleController implements Initializable {
 
             shopService.addShop(shopVO);
 
+//            confirmPane.setVisible(true);
+
         }
     }
 
@@ -107,6 +112,8 @@ public class SaleController implements Initializable {
         shopNameWarning.setVisible(false);
         shopAddressWarning.setVisible(false);
         shopPriceWarning.setVisible(false);
+        endTimeWarning.setVisible(false);
+        beginTimeWarning.setVisible(false);
     }
 
     @Override
