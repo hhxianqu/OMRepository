@@ -13,4 +13,8 @@ public interface TempService {
     List<ProductVO> checkProductByName(String name);
 
     List<ProductVO> checkAllProduct();
+
+    ProductVO checkProductByID(int Id);
+
+    Boolean addToStore(List<ProductVO> addToStoreList);
 }

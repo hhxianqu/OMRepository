@@ -35,7 +35,7 @@
                   <Font name="Heiti TC Light" size="14.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="215.0" mnemonicParsing="false" onAction="#saleAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="销售查看" textAlignment="RIGHT">
+            <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="215.0" mnemonicParsing="false" onAction="#saleAboutAction" prefHeight="50.0" prefWidth="145.0" styleClass="main-menu-button" text="超市下单" textAlignment="RIGHT">
                <font>
                   <Font name="Heiti TC Light" size="14.0" />
                </font>

@@ -134,6 +134,7 @@ public class MainController implements Initializable {
             productVO.setSupply(supply.getText());
             productVO.setCreateTime(dateUtil.localdateToDate(createTime.getValue()));
             productVO.setBalance(0);
+            productVO.setAddNumber(0);
 
             tempService.addProduct(productVO);
 
@@ -184,6 +185,7 @@ public class MainController implements Initializable {
 
     @FXML
     void confirm (ActionEvent event) {
+        confirmPane.setVisible(false);
         OmRepositoryApplication.showView(StoreStageView.class);
     }
 
@@ -256,6 +258,12 @@ public class MainController implements Initializable {
             }
         };
         createTime.setDayCellFactory(dayCellFactory);
+
+        barCode.clear();
+        productName.clear();
+        primeCost.clear();
+        productPrice.clear();
+        supply.clear();
 
     }
 

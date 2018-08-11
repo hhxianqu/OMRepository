@@ -17,6 +17,7 @@ public class TempServiceImpl implements TempService {
     private ProductRepository productRepository;
 
     private ProductInfo convertVOtoPO (ProductVO productVO, ProductInfo productInfo) {
+        productInfo.setId(productVO.getId());
         productInfo.setBarCode(productVO.getBarCode());
         productInfo.setPrimeCost(productVO.getPrimeCost());
         productInfo.setProductName(productVO.getProductName());
@@ -29,6 +30,7 @@ public class TempServiceImpl implements TempService {
     }
 
     private ProductVO convertPOtoVO (ProductVO productVO, ProductInfo productInfo) {
+        productVO.setId(productInfo.getId());
         productVO.setBarCode(productInfo.getBarCode());
         productVO.setPrimeCost(productInfo.getPrimeCost());
         productVO.setProductName(productInfo.getProductName());
@@ -36,6 +38,7 @@ public class TempServiceImpl implements TempService {
         productVO.setCreateTime(productInfo.getCreateTime());
         productVO.setSupply(productInfo.getSupply());
         productVO.setBalance(productInfo.getBalance());
+        productVO.setAddNumber(0);
 
         return productVO;
     }
@@ -66,12 +69,27 @@ public class TempServiceImpl implements TempService {
         List<ProductVO> resultList = new ArrayList<>();
 
         for (ProductInfo productInfo : productList) {
-            if (productInfo.getBalance() > 0) {
+//            if (productInfo.getBalance() > 0) {
                 ProductVO vo = new ProductVO();
                 resultList.add(convertPOtoVO(vo, productInfo));
-            }
+//            }
         }
         return resultList;
+    }
+
+    @Override
+    public ProductVO checkProductByID(int Id) {
+        return convertPOtoVO(new ProductVO(), productRepository.getById(Id));
+    }
+
+    @Override
+    public Boolean addToStore(List<ProductVO> addToStoreList) {
+
+        addToStoreList.forEach(productVO -> {
+            productVO.setBalance(productVO.getBalance() + productVO.getAddNumber());
+            productRepository.save(convertVOtoPO(productVO, new ProductInfo()));
+        });
+        return true;
     }
 
     @Override

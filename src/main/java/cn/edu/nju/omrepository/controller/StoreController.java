@@ -9,15 +9,14 @@ import cn.edu.nju.omrepository.vo.ProductVO;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import javax.annotation.Resource;
@@ -36,6 +35,9 @@ public class StoreController implements Initializable {
 
     @FXML
     private Pane confirmPane;
+
+    @FXML
+    private Pane previewPane;
 
     @FXML
     private TextField barCode;
@@ -101,15 +103,62 @@ public class StoreController implements Initializable {
     @FXML
     private TableColumn<ProductVO, String> createTimeCol1;
 
-    private ObservableList<ProductVO> productList = FXCollections.observableArrayList();
-    private ObservableList<ProductVO> allProductList = FXCollections.observableArrayList();
+    @FXML
+    private TableView<ProductVO> productTablePreview;
 
+    @FXML
+    private TableColumn<ProductVO, String> barCodeColPreview;
+
+    @FXML
+    private TableColumn<ProductVO, String> nameColPreview;
+
+    @FXML
+    private TableColumn<ProductVO, Integer> primeColPreview;
+
+    @FXML
+    private TableColumn<ProductVO, String> saleColPreview;
+
+    @FXML
+    private TableColumn<ProductVO, String> supplyColPreview;
+
+    @FXML
+    private TableColumn<ProductVO, Integer> addColPreview;
+
+    @FXML
+    private TableColumn<ProductVO, Integer> presentBalPreview;
+
+    @FXML
+    private TextField addNumber;
+
+    @FXML
+    private Label detailBarcode;
+
+    @FXML
+    private Label detailName;
+
+    @FXML
+    private Label detailBalance;
+
+    @FXML
+    private Label detailPrimePrice;
+
+    @FXML
+    private Pane addProjectDetailPane;
+
+    private ObservableList<ProductVO> productList = FXCollections.observableArrayList();
+    private ObservableList<ProductVO> productListPreview = FXCollections.observableArrayList();
+    private List<ProductVO> addToStore = FXCollections.observableArrayList();
+    private ProductVO addToStoreVO = new ProductVO();
+    private int changeCount = 0;
     @Resource
     private TempService tempService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         checkAll(new ActionEvent());
+
+        addProjectDetailPane.setVisible(false);
+        previewPane.setVisible(false);
     }
 
     @FXML
@@ -202,6 +251,8 @@ public class StoreController implements Initializable {
             supplyCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getSupply()));
             balanceCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getBalance()).asObject());
             createTimeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCreateTime().toString().substring(0, 10)));
+
+            addProject();
         } else {
             checkWarning.setVisible(true);
             checkWarning.setText("请正确输入条码！");
@@ -231,15 +282,78 @@ public class StoreController implements Initializable {
             balanceCol.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getBalance()).asObject());
             createTimeCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCreateTime().toString().substring(0, 10)));
 
+            addProject();
         } else {
             checkWarning.setVisible(true);
             checkWarning.setText("请正确输入商品名称！");
         }
+
     }
 
+    @FXML
+    void detailConfirm(ActionEvent event) {
+        addToStoreVO.setAddNumber(Integer.valueOf(addNumber.getText()));
+        addToStore.add(addToStoreVO);
 
+        addProjectDetailPane.setVisible(false);
+        addNumber.clear();
+        nameInput.clear();
+        barCode.clear();
+    }
 
+    @FXML
+    void closeDetail(ActionEvent event) {
+        addProjectDetailPane.setVisible(false);
+        addNumber.clear();
+    }
 
+    @FXML
+    void preview(ActionEvent event) {
+        previewPane.setVisible(true);
+
+        productListPreview.clear();
+        productListPreview.addAll(addToStore);
+        productTablePreview.setItems(productListPreview);
+
+        barCodeColPreview.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getBarCode()));
+        nameColPreview.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductName()));
+        primeColPreview.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getPrimeCost()).asObject());
+        saleColPreview.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getProductPrice().toString()));
+        supplyColPreview.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getSupply()));
+        addColPreview.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getAddNumber()).asObject());
+        presentBalPreview.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getBalance()).asObject());
+    }
+
+    @FXML
+    void previewConfirm(ActionEvent event) {
+        previewPane.setVisible(false);
+        tempService.addToStore(addToStore);
+        productListPreview.clear();
+    }
+
+    @FXML
+    void continuesAdd(ActionEvent event) {
+        previewPane.setVisible(false);
+    }
+
+    private void addProject() {
+        productTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ProductVO>() {
+            @Override
+            public void changed(ObservableValue<? extends ProductVO> observable, ProductVO oldValue, ProductVO newValue) {
+                if (changeCount % 2 == 0) {
+                    addProjectDetailPane.setVisible(true);
+                    detailBalance.setText(String.valueOf(observable.getValue().getBalance()));
+                    detailName.setText(observable.getValue().getProductName());
+                    detailBarcode.setText(observable.getValue().getBarCode());
+                    detailPrimePrice.setText(String.valueOf(observable.getValue().getPrimeCost()));
+
+                    addToStoreVO = tempService.checkProductByID(observable.getValue().getId());
+                }
+                changeCount ++;
+//                System.out.println(changeCount);
+            }
+        });
+    }
 
 
 }

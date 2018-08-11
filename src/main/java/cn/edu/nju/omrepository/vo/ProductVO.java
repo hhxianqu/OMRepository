@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class ProductVO {
 
+    private Integer Id;
     private String barCode;
     private String productName;
     private Integer primeCost;
@@ -11,8 +12,17 @@ public class ProductVO {
     private Date createTime;
     private String supply;
     private int balance;
+    private int addNumber;
 
     public ProductVO() {
+    }
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        Id = id;
     }
 
     public String getBarCode() {
@@ -69,5 +79,13 @@ public class ProductVO {
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public int getAddNumber() {
+        return addNumber;
+    }
+
+    public void setAddNumber(int addNumber) {
+        this.addNumber = addNumber;
     }
 }

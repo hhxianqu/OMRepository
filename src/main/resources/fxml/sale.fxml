@@ -24,7 +24,7 @@
                      <Font name="Heiti TC Light" size="14.0" />
                  </font>
              </Button>
-             <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="215.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="145.0" style="-fx-background-color: #3b3b3b;" styleClass="main-menu-button" text="销售查看" textAlignment="RIGHT">
+             <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="5.0" layoutY="215.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="145.0" style="-fx-background-color: #3b3b3b;" styleClass="main-menu-button" text="超市下单" textAlignment="RIGHT">
                  <font>
                      <Font name="Heiti TC Light" size="14.0" />
                  </font>
@@ -76,6 +76,18 @@
                         <Label fx:id="beginTimeWarning" layoutX="427.0" layoutY="380.0" text="Label" textFill="RED" visible="false" />
                         <Label fx:id="endTimeWarning" layoutX="427.0" layoutY="450.0" text="Label" textFill="RED" visible="false" />
                      </children></Pane>
+                  <Pane fx:id="confirmPane" layoutX="285.0" layoutY="170.0" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: white;" visible="false">
+                     <children>
+                        <Label layoutX="22.0" text="成功">
+                           <font>
+                              <Font name="Apple Chancery" size="13.0" />
+                           </font>
+                        </Label>
+                        <Line endX="300.0" layoutY="25.0" stroke="#b9b4b4" />
+                        <Label layoutX="95.0" layoutY="80.0" text="新商品已添加成功！" />
+                        <Button layoutX="200.0" layoutY="135.0" mnemonicParsing="false" onAction="#confirm" prefWidth="80.0" styleClass="conform-button" text="确认" />
+                     </children>
+                  </Pane>
                </children>
             </AnchorPane>
          </children>

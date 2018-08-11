@@ -5,7 +5,6 @@ import cn.edu.nju.omrepository.service.ShopService;
 import cn.edu.nju.omrepository.view.CountStageView;
 import cn.edu.nju.omrepository.view.MainStageView;
 import cn.edu.nju.omrepository.view.StoreStageView;
-import cn.edu.nju.omrepository.vo.ProductVO;
 import cn.edu.nju.omrepository.vo.ShopVO;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.ActionEvent;
@@ -16,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+import javax.annotation.Resource;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -77,6 +77,8 @@ public class SaleController implements Initializable {
     }
 
     private ShopVO shopVO = new ShopVO();
+
+    @Resource
     private ShopService shopService;
 
     @FXML
@@ -102,9 +104,15 @@ public class SaleController implements Initializable {
 
             shopService.addShop(shopVO);
 
-//            confirmPane.setVisible(true);
+            confirmPane.setVisible(true);
 
         }
+    }
+
+    @FXML
+    void confirm(ActionEvent event) {
+        confirmPane.setVisible(false);
+        OmRepositoryApplication.showView(StoreStageView.class);
     }
 
     @FXML
@@ -118,7 +126,11 @@ public class SaleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        shopName.clear();
+        shopAddress.clear();
+        shopPrice.clear();
+        beginTime.clear();
+        endTime.clear();
     }
 
     private boolean doWarning() {
@@ -168,6 +180,10 @@ public class SaleController implements Initializable {
             beginTimeWarning.setVisible(true);
             beginTimeWarning.setText("仅需要输入日期");
             test = false;
+        } else if (Integer.valueOf(beginTime.getText()) > 31 && Integer.valueOf(beginTime.getText()) < 1) {
+            beginTimeWarning.setVisible(true);
+            beginTimeWarning.setText("请正确输入日期（ < 31号）");
+            test = false;
         }
 
         if (endTime.getText().isEmpty()) {
@@ -177,6 +193,14 @@ public class SaleController implements Initializable {
         } else if (endTime.getText().length() > 2) {
             endTimeWarning.setVisible(true);
             endTimeWarning.setText("仅需要输入日期");
+            test = false;
+        } else if (Integer.valueOf(endTime.getText()) < Integer.valueOf(beginTime.getText())) {
+            endTimeWarning.setVisible(true);
+            endTimeWarning.setText("截止日期需在开始日期之后");
+            test = false;
+        } else if (Integer.valueOf(endTime.getText()) > 31 && Integer.valueOf(endTime.getText()) < 1) {
+            endTimeWarning.setVisible(true);
+            endTimeWarning.setText("请正确输入日期（ < 31号）");
             test = false;
         }
 
