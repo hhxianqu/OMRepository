@@ -5,6 +5,7 @@ import cn.edu.nju.omrepository.service.TempService;
 import cn.edu.nju.omrepository.view.CountStageView;
 import cn.edu.nju.omrepository.view.MainStageView;
 import cn.edu.nju.omrepository.view.SaleStageView;
+import cn.edu.nju.omrepository.view.StoreStageView;
 import cn.edu.nju.omrepository.vo.ProductVO;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -143,6 +144,9 @@ public class StoreController implements Initializable {
     private Label detailPrimePrice;
 
     @FXML
+    private Label addNumWarning;
+
+    @FXML
     private Pane addProjectDetailPane;
 
     private ObservableList<ProductVO> productList = FXCollections.observableArrayList();
@@ -156,9 +160,6 @@ public class StoreController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         checkAll(new ActionEvent());
-
-        addProjectDetailPane.setVisible(false);
-        previewPane.setVisible(false);
     }
 
     @FXML
@@ -178,8 +179,7 @@ public class StoreController implements Initializable {
 
     @FXML
     void addToStoreActionByBar (ActionEvent event) {
-        addToStorePane.setVisible(true);
-        allProductPane.setVisible(false);
+        cutPane(addToStorePane);
         barCheckPane.setVisible(true);
         nameCheckPane.setVisible(false);
 
@@ -189,27 +189,23 @@ public class StoreController implements Initializable {
 
     @FXML
     void addToStoreActionByName (ActionEvent event) {
-        addToStorePane.setVisible(true);
-        allProductPane.setVisible(false);
+        cutPane(addToStorePane);
         barCheckPane.setVisible(false);
         nameCheckPane.setVisible(true);
 
         nameInput.clear();
         productTable.getItems().clear();
-
     }
 
     @FXML
     void confirm (ActionEvent event) {
-        OmRepositoryApplication.showView(MainStageView.class);
+        confirmPane.setVisible(false);
+        checkAll(new ActionEvent());
     }
 
     @FXML
     void checkAll(ActionEvent event) {
-        allProductPane.setVisible(true);
-        addToStorePane.setVisible(false);
-        barCheckPane.setVisible(false);
-        nameCheckPane.setVisible(false);
+        cutPane(allProductPane);
 
         List<ProductVO> productVOList = tempService.checkAllProduct();
 
@@ -217,7 +213,6 @@ public class StoreController implements Initializable {
         productList.clear();
 
         productList.addAll(productVOList);
-
         productTable1.setItems(productList);
 
         barCodeCol1.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getBarCode()));
@@ -232,7 +227,6 @@ public class StoreController implements Initializable {
 
     @FXML
     void checkProductByBar(ActionEvent event) {
-        addToStorePane.setVisible(true);
         productTable.getItems().clear();
         productList.clear();
 
@@ -292,24 +286,28 @@ public class StoreController implements Initializable {
 
     @FXML
     void detailConfirm(ActionEvent event) {
-        addToStoreVO.setAddNumber(Integer.valueOf(addNumber.getText()));
-        addToStore.add(addToStoreVO);
+        if (!addNumber.getText().isEmpty()) {
+            addToStoreVO.setAddNumber(Integer.valueOf(addNumber.getText()));
+            addToStore.add(addToStoreVO);
 
-        addProjectDetailPane.setVisible(false);
-        addNumber.clear();
-        nameInput.clear();
-        barCode.clear();
+            addProjectDetailPane.setVisible(false);
+            addNumber.clear();
+            nameInput.clear();
+            barCode.clear();
+        } else {
+            addNumWarning.setVisible(true);
+            addNumWarning.setText("请输入数量");
+        }
     }
 
     @FXML
     void closeDetail(ActionEvent event) {
         addProjectDetailPane.setVisible(false);
-        addNumber.clear();
     }
 
     @FXML
     void preview(ActionEvent event) {
-        previewPane.setVisible(true);
+        cutPane(previewPane);
 
         productListPreview.clear();
         productListPreview.addAll(addToStore);
@@ -326,14 +324,14 @@ public class StoreController implements Initializable {
 
     @FXML
     void previewConfirm(ActionEvent event) {
-        previewPane.setVisible(false);
         tempService.addToStore(addToStore);
         productListPreview.clear();
+        confirmPane.setVisible(true);
     }
 
     @FXML
     void continuesAdd(ActionEvent event) {
-        previewPane.setVisible(false);
+        cutPane(addToStorePane);
     }
 
     private void addProject() {
@@ -341,6 +339,8 @@ public class StoreController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends ProductVO> observable, ProductVO oldValue, ProductVO newValue) {
                 if (changeCount % 2 == 0) {
+                    addNumber.clear();
+                    addNumWarning.setVisible(false);
                     addProjectDetailPane.setVisible(true);
                     detailBalance.setText(String.valueOf(observable.getValue().getBalance()));
                     detailName.setText(observable.getValue().getProductName());
@@ -350,10 +350,16 @@ public class StoreController implements Initializable {
                     addToStoreVO = tempService.checkProductByID(observable.getValue().getId());
                 }
                 changeCount ++;
-//                System.out.println(changeCount);
             }
         });
     }
 
+    private void cutPane(Pane showPane) {
+        allProductPane.setVisible(false);
+        addToStorePane.setVisible(false);
+        previewPane.setVisible(false);
+
+        showPane.setVisible(true);
+    }
 
 }

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.shape.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="700.0" prefWidth="1050.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.edu.nju.omrepository.controller.StoreController">
    <children>
@@ -81,9 +80,22 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane fx:id="addToStorePane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;">
+                  <Pane fx:id="previewPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" visible="false">
                      <children>
-                        <Pane fx:id="confirmPane" layoutX="275.0" layoutY="160.0" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: white;" visible="false">
+                        <Button layoutX="795.0" layoutY="580.0" mnemonicParsing="false" onAction="#previewConfirm" prefWidth="75.0" styleClass="conform-button" text="确认入库" />
+                        <TableView fx:id="productTablePreview" layoutX="30.0" layoutY="50.0" prefHeight="500.0" prefWidth="840.0">
+                           <columns>
+                              <TableColumn fx:id="barCodeColPreview" minWidth="120.0" prefWidth="120.0" text="商品条码" />
+                              <TableColumn fx:id="nameColPreview" minWidth="120.0" prefWidth="115.0" text="商品名称" />
+                              <TableColumn fx:id="primeColPreview" minWidth="120.0" prefWidth="100.0" text="商品进价" />
+                              <TableColumn fx:id="saleColPreview" minWidth="120.0" prefWidth="100.0" text="商品售价" />
+                              <TableColumn fx:id="supplyColPreview" minWidth="120.0" prefWidth="100.0" text="供货商" />
+                              <TableColumn fx:id="addColPreview" minWidth="120.0" prefWidth="100.0" text="新增数量" />
+                              <TableColumn fx:id="presentBalPreview" minWidth="120.0" prefWidth="105.0" text="当前库存" />
+                           </columns>
+                        </TableView>
+                        <Button layoutX="700.0" layoutY="580.0" mnemonicParsing="false" onAction="#continuesAdd" prefWidth="75.0" styleClass="conform-button" text="继续添加" />
+                        <Pane fx:id="confirmPane" layoutX="285.0" layoutY="170.0" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: gainsboro;" visible="false">
                            <children>
                               <Label layoutX="22.0" text="成功">
                                  <font>
@@ -94,7 +106,14 @@
                               <Label layoutX="105.0" layoutY="80.0" text="商品入库成功！" />
                               <Button layoutX="200.0" layoutY="135.0" mnemonicParsing="false" onAction="#confirm" prefWidth="80.0" styleClass="conform-button" text="确认" />
                            </children>
+                           <effect>
+                              <DropShadow color="#0000004d" />
+                           </effect>
                         </Pane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="addToStorePane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: #f2f2f2;" visible="false">
+                     <children>
                         <TableView fx:id="productTable" layoutX="30.0" layoutY="100.0" prefHeight="450.0" prefWidth="840.0">
                            <columns>
                               <TableColumn fx:id="barCodeCol" minWidth="120.0" prefWidth="120.0" text="商品条码" />
@@ -106,9 +125,9 @@
                               <TableColumn fx:id="createTimeCol" minWidth="120.0" prefWidth="105.0" text="创建时间" />
                            </columns>
                         </TableView>
-                        <Label fx:id="checkWarning" layoutX="482.0" layoutY="83.0" text="Label" textFill="RED" visible="false" />
+                        <Label fx:id="checkWarning" layoutX="602.0" layoutY="70.0" text="Label" textFill="RED" visible="false" />
                         <Button layoutX="795.0" layoutY="580.0" mnemonicParsing="false" onAction="#preview" prefWidth="75.0" styleClass="conform-button" text="预览" />
-                        <Pane fx:id="addProjectDetailPane" layoutX="250.0" layoutY="150.0" prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: white; -fx-border-color: gainsboro; -fx-border-radius: 0.5em;" visible="false">
+                        <Pane fx:id="addProjectDetailPane" layoutX="250.0" layoutY="150.0" prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: white; -fx-border-color: gainsboro; -fx-border-radius: 0.5em;">
                            <children>
                               <Label layoutX="80.0" layoutY="70.0" text="商品条码 :" />
                               <Label layoutX="80.0" layoutY="110.0" text="商品名称 :" />
@@ -124,6 +143,7 @@
                               <Button layoutX="354.0" layoutY="12.0" mnemonicParsing="false" onAction="#closeDetail" styleClass="menu-button" text="取消" />
                               <Label layoutX="80.0" layoutY="190.0" text="商品进价 :" />
                               <Label fx:id="detailPrimePrice" layoutX="220.0" layoutY="190.0" text="Label" />
+                              <Label fx:id="addNumWarning" layoutX="217.0" layoutY="260.0" text="Label" textFill="RED" visible="false" />
                            </children>
                            <effect>
                               <DropShadow color="#00000033" />
@@ -136,28 +156,11 @@
                               <Label layoutY="42.0" text="商品条码：" />
                            </children>
                         </Pane>
-                        <Pane fx:id="nameCheckPane" layoutX="515.0" prefHeight="100.0" prefWidth="385.0" visible="false">
+                        <Pane fx:id="nameCheckPane" layoutX="515.0" prefHeight="100.0" prefWidth="385.0">
                            <children>
                               <Button layoutX="275.0" layoutY="37.0" mnemonicParsing="false" onAction="#checkProductByName" prefWidth="75.0" styleClass="conform-button" text="查找" />
                               <TextField fx:id="nameInput" layoutX="85.0" layoutY="37.0" onInputMethodTextChanged="#checkProductByName" promptText="输入待查询商品名称" />
                               <Label layoutY="42.0" text="商品名称：" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="previewPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;">
-                           <children>
-                              <Button layoutX="795.0" layoutY="580.0" mnemonicParsing="false" onAction="#previewConfirm" prefWidth="75.0" styleClass="conform-button" text="确认入库" />
-                              <TableView fx:id="productTablePreview" layoutX="30.0" layoutY="50.0" prefHeight="500.0" prefWidth="840.0">
-                                 <columns>
-                                    <TableColumn fx:id="barCodeColPreview" minWidth="120.0" prefWidth="120.0" text="商品条码" />
-                                    <TableColumn fx:id="nameColPreview" minWidth="120.0" prefWidth="115.0" text="商品名称" />
-                                    <TableColumn fx:id="primeColPreview" minWidth="120.0" prefWidth="100.0" text="商品进价" />
-                                    <TableColumn fx:id="saleColPreview" minWidth="120.0" prefWidth="100.0" text="商品售价" />
-                                    <TableColumn fx:id="supplyColPreview" minWidth="120.0" prefWidth="100.0" text="供货商" />
-                                    <TableColumn fx:id="addColPreview" minWidth="120.0" prefWidth="100.0" text="新增数量" />
-                                    <TableColumn fx:id="presentBalPreview" minWidth="120.0" prefWidth="105.0" text="当前库存" />
-                                 </columns>
-                              </TableView>
-                              <Button layoutX="700.0" layoutY="580.0" mnemonicParsing="false" onAction="#continuesAdd" prefWidth="75.0" styleClass="conform-button" text="继续添加" />
                            </children>
                         </Pane>
                      </children>

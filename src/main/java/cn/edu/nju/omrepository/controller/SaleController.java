@@ -62,6 +62,32 @@ public class SaleController implements Initializable {
     private Pane confirmPane;
 
     @FXML
+    private TextField saleNumber;
+
+    @FXML
+    private Label detailBarcode;
+
+    @FXML
+    private Label detailName;
+
+    @FXML
+    private Label detailBalance;
+
+    @FXML
+    private Label detailSalePrice;
+
+    @FXML
+    private Label saleNumWarning;
+
+    @FXML
+    private Pane saleProjectDetailPane;
+
+    private ShopVO shopVO = new ShopVO();
+
+    @Resource
+    private ShopService shopService;
+
+    @FXML
     void productAboutAction(ActionEvent event) {
         OmRepositoryApplication.showView(MainStageView.class);
     }
@@ -75,11 +101,6 @@ public class SaleController implements Initializable {
     void countAboutAction(ActionEvent event) {
         OmRepositoryApplication.showView(CountStageView.class);
     }
-
-    private ShopVO shopVO = new ShopVO();
-
-    @Resource
-    private ShopService shopService;
 
     @FXML
     void addShopAction(ActionEvent event) {
@@ -124,6 +145,21 @@ public class SaleController implements Initializable {
         beginTimeWarning.setVisible(false);
     }
 
+    @FXML
+    void detailConfirm (ActionEvent event) {
+        if (!saleNumber.getText().isEmpty()) {
+            saleProjectDetailPane.setVisible(false);
+        } else {
+            saleNumWarning.setVisible(true);
+            saleNumWarning.setText("请输入出库数量！");
+        }
+    }
+
+    @FXML
+    void closeDetail (ActionEvent event) {
+        saleNumWarning.setVisible(false);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         shopName.clear();
@@ -133,6 +169,7 @@ public class SaleController implements Initializable {
         endTime.clear();
     }
 
+    //输入检测
     private boolean doWarning() {
         boolean test = true;
 
