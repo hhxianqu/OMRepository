@@ -23,6 +23,10 @@ public class ShopServiceImpl implements ShopService {
     }
 
 
+    /**
+     * 添加新超市
+     * @param shopVO
+     */
     @Override
     public void addShop(ShopVO shopVO) {
         ShopInfo info = new ShopInfo();

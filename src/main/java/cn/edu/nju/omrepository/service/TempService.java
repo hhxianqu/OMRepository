@@ -16,5 +16,5 @@ public interface TempService {
 
     ProductVO checkProductByID(int Id);
 
-    Boolean addToStore(List<ProductVO> addToStoreList);
+
 }

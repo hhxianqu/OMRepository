@@ -1,6 +1,7 @@
 package cn.edu.nju.omrepository.controller;
 
 import cn.edu.nju.omrepository.OmRepositoryApplication;
+import cn.edu.nju.omrepository.service.StoreService;
 import cn.edu.nju.omrepository.service.TempService;
 import cn.edu.nju.omrepository.view.CountStageView;
 import cn.edu.nju.omrepository.view.MainStageView;
@@ -156,6 +157,8 @@ public class StoreController implements Initializable {
     private int changeCount = 0;
     @Resource
     private TempService tempService;
+    @Resource
+    private StoreService storeService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -324,7 +327,7 @@ public class StoreController implements Initializable {
 
     @FXML
     void previewConfirm(ActionEvent event) {
-        tempService.addToStore(addToStore);
+        storeService.addToStore(addToStore);
         productListPreview.clear();
         confirmPane.setVisible(true);
     }

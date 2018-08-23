@@ -80,6 +80,9 @@ public class SaleController implements Initializable {
     private Label saleNumWarning;
 
     @FXML
+    private Label checkWarning;
+
+    @FXML
     private Pane saleProjectDetailPane;
 
     private ShopVO shopVO = new ShopVO();
@@ -158,6 +161,26 @@ public class SaleController implements Initializable {
     @FXML
     void closeDetail (ActionEvent event) {
         saleNumWarning.setVisible(false);
+    }
+
+    @FXML
+    void preview(ActionEvent event) {
+
+    }
+
+    @FXML
+    void previewConfirm(ActionEvent event) {
+
+    }
+
+    @FXML
+    void checkProductByBar(ActionEvent event) {
+
+    }
+
+    @FXML
+    void checkProductByName(ActionEvent event) {
+
     }
 
     @Override
